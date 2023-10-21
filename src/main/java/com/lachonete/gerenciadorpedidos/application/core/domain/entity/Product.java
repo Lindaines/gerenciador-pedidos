@@ -13,4 +13,8 @@ public class Product extends BaseEntity<ProductId> {
     private Money price;
     private ProductCategory category;
     private List<Image> images;
+
+    public Money getPrice() {
+        return price;
+    }
 }
