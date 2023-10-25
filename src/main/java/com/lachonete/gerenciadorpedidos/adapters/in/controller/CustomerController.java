@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CustomerController {
     @Autowired
     private CreateCustomerInputPort createCustomerInputPort;
+    @Autowired
     private CustomerMapper customerMapper;
     @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody CustomerRequest customerRequest){

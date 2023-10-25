@@ -1,8 +1,8 @@
 package com.lachonete.gerenciadorpedidos.adapters.out.repository.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
 
 import java.util.UUID;
@@ -20,8 +20,7 @@ public class CustomerEntity {
     private String name;
     private String email;
 
-    public CustomerEntity(UUID id, String cpf, String name, String email) {
-        this.id = id;
+    public CustomerEntity(String cpf, String name, String email) {
         this.cpf = cpf;
         this.name = name;
         this.email = email;

@@ -5,7 +5,9 @@ import com.lachonete.gerenciadorpedidos.application.core.domain.entity.Customer;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.Cpf;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.EmailAddress;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.PersonName;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CustomerMapper {
     public Customer toCustomer(CustomerRequest customerRequest){
         var cpf = new Cpf(customerRequest.getCpf());
