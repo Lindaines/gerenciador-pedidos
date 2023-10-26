@@ -22,6 +22,23 @@ public class CustomerEntity {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
     private String cpf;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     private String name;
     private String email;
 
