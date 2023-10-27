@@ -12,9 +12,12 @@ import java.util.UUID;
 
 @Data
 public class ProductRequest {
+    @NotBlank
     private String name;
+    @NotBlank
     private String description;
     private BigDecimal price;
+    @NotBlank
     private String category;
     private List<String> images;
 }

@@ -25,9 +25,15 @@ public class ProductController {
     private ProductMapper productMapper;
     @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody ProductRequest productRequest){
-        var product = productMapper.toProduct(productRequest);
-        createProductInputPort.create(product);
-        return ResponseEntity.ok().build();
+        try {
+            var product = productMapper.toProduct(productRequest);
+            createProductInputPort.create(product);
+            return ResponseEntity.ok().build();
+        }
+        catch (Exception IllegalArgumentException){
+            return ResponseEntity.badRequest().build();
+        }
+
     }
 
 }

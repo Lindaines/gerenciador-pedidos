@@ -21,13 +21,4 @@ public class ProductEntityMapper {
                 .category(product.getCategory().toString())
                 .images(images).build();
     }
-
-//    public Customer toCustomer(CustomerEntity customerEntity){
-//        var cpf = new Cpf(customerEntity.getCpf());
-//        var email = new EmailAddress(customerEntity.getEmail());
-//        var name = new PersonName(customerEntity.getName());
-//        var id = new CustomerId(customerEntity.getId());
-//
-//        return new Customer(id, cpf, email, name);
-//    }
 }
