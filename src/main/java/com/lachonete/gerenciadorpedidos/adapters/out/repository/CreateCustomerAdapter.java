@@ -2,7 +2,7 @@ package com.lachonete.gerenciadorpedidos.adapters.out.repository;
 
 import com.lachonete.gerenciadorpedidos.adapters.out.repository.mapper.CustomerEntityMapper;
 import com.lachonete.gerenciadorpedidos.application.core.domain.entity.Customer;
-import com.lachonete.gerenciadorpedidos.application.ports.out.CreateCustomerOutputPort;
+import com.lachonete.gerenciadorpedidos.application.ports.out.customer.CreateCustomerOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

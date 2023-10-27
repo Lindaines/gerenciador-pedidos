@@ -1,11 +1,9 @@
-package com.lachonete.gerenciadorpedidos.application.core.usecase;
+package com.lachonete.gerenciadorpedidos.application.core.usecase.customer;
 
 import com.lachonete.gerenciadorpedidos.application.core.domain.entity.Customer;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.CustomerId;
-import com.lachonete.gerenciadorpedidos.application.ports.in.CreateCustomerInputPort;
-import com.lachonete.gerenciadorpedidos.application.ports.in.IdentifyCustomerInputPort;
-import com.lachonete.gerenciadorpedidos.application.ports.out.CreateCustomerOutputPort;
-import com.lachonete.gerenciadorpedidos.application.ports.out.IdentifyCustomerOutputPort;
+import com.lachonete.gerenciadorpedidos.application.ports.in.customer.IdentifyCustomerInputPort;
+import com.lachonete.gerenciadorpedidos.application.ports.out.customer.IdentifyCustomerOutputPort;
 
 import java.util.Optional;
 
