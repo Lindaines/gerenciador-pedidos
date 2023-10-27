@@ -4,10 +4,8 @@ import com.lachonete.gerenciadorpedidos.adapters.out.repository.entity.CustomerE
 import com.lachonete.gerenciadorpedidos.adapters.out.repository.entity.ProductEntity;
 import com.lachonete.gerenciadorpedidos.application.core.domain.entity.Customer;
 import com.lachonete.gerenciadorpedidos.application.core.domain.entity.Product;
-import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.Cpf;
-import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.CustomerId;
-import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.EmailAddress;
-import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.PersonName;
+import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.*;
+import jdk.jfr.Category;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,5 +18,18 @@ public class ProductEntityMapper {
                 .price(product.getPrice().getAmount())
                 .category(product.getCategory().toString())
                 .images(images).build();
+    }
+
+    public Product toProduct(ProductEntity productEntity){
+        var images = productEntity.getImages().stream().map(Image::new).toList();
+        return Product.ProductBuilder.aProduct()
+                .withId(new ProductId(productEntity.getId()))
+                .withName(productEntity.getName())
+                .withCategory(ProductCategory.valueOf(productEntity.getCategory()))
+                .withPrice(new Money(productEntity.getPrice()))
+                .withDescription(productEntity.getDescription())
+                .withImages(images)
+                .build();
+
     }
 }
