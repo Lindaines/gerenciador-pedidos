@@ -1,6 +1,6 @@
 package com.lachonete.gerenciadorpedidos.adapters.in.controller.request;
 
-import jakarta.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data

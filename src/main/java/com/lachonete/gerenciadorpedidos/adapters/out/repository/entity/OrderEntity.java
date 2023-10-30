@@ -2,8 +2,7 @@ package com.lachonete.gerenciadorpedidos.adapters.out.repository.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.OrderStatus;
-import jakarta.persistence.*;
-import jakarta.validation.Valid;
+import javax.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 

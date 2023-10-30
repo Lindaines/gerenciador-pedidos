@@ -1,7 +1,7 @@
 package com.lachonete.gerenciadorpedidos.adapters.out.repository.entity;
 
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.ProductCategory;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

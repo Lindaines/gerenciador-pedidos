@@ -12,7 +12,7 @@ import com.lachonete.gerenciadorpedidos.application.ports.in.customer.CreateCust
 import com.lachonete.gerenciadorpedidos.application.ports.in.customer.IdentifyCustomerInputPort;
 import com.lachonete.gerenciadorpedidos.application.ports.in.product.CreateProductInputPort;
 import com.lachonete.gerenciadorpedidos.application.ports.in.product.ListProductsByCategoryInputPort;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

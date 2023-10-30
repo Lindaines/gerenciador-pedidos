@@ -3,7 +3,7 @@ package com.lachonete.gerenciadorpedidos.adapters.in.controller.request;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.Image;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.Money;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.ProductCategory;
-import jakarta.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.math.BigDecimal;

@@ -1,7 +1,6 @@
 package com.lachonete.gerenciadorpedidos.adapters.out.repository.entity;
 
-import com.lachonete.gerenciadorpedidos.application.core.domain.entity.Product;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 import org.hibernate.engine.internal.Cascade;
 

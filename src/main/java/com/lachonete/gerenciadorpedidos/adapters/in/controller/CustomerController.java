@@ -6,7 +6,7 @@ import com.lachonete.gerenciadorpedidos.adapters.in.controller.response.Customer
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.CustomerId;
 import com.lachonete.gerenciadorpedidos.application.ports.in.customer.CreateCustomerInputPort;
 import com.lachonete.gerenciadorpedidos.application.ports.in.customer.IdentifyCustomerInputPort;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
