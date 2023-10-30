@@ -1,6 +1,5 @@
-package com.lachonete.gerenciadorpedidos.adapters.out.repository;
+package com.lachonete.gerenciadorpedidos.adapters.out.repository.order;
 
-import com.lachonete.gerenciadorpedidos.adapters.out.repository.entity.OrderEntity;
 import com.lachonete.gerenciadorpedidos.adapters.out.repository.mapper.OrderEntityMapper;
 import com.lachonete.gerenciadorpedidos.application.core.domain.entity.Order;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.OrderId;

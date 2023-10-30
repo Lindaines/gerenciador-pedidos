@@ -17,11 +17,11 @@ Lombok e dependências de framework não estão sendo usados na camada de domín
 
 ## Padrões utilizados
 * Arquitetura hexagonal
-* Domain Driven Design
+* DDD
 
 **Warning**
 O projeto ainda está em desenvolvimento, existem comentários de to-dos principalmente nas classes de entidade e valueobjects da camada de domínio. 
-
+Portanto, mesmo que algumas classes ainda possam parecer anêmicas, a estrutura já foi criada para que regras de negócio que serão implementadas mudem o cenário. 
 ## Rodando o projeto com docker-compose
 #Você vai precisar:
 

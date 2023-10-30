@@ -1,4 +1,4 @@
-package com.lachonete.gerenciadorpedidos.adapters.out.repository;
+package com.lachonete.gerenciadorpedidos.adapters.out.repository.customer;
 
 import com.lachonete.gerenciadorpedidos.adapters.out.repository.entity.CustomerEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

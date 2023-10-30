@@ -1,4 +1,4 @@
-package com.lachonete.gerenciadorpedidos.adapters.out.repository;
+package com.lachonete.gerenciadorpedidos.adapters.out.repository.product;
 
 import com.lachonete.gerenciadorpedidos.adapters.out.repository.entity.CustomerEntity;
 import com.lachonete.gerenciadorpedidos.adapters.out.repository.entity.ProductEntity;

@@ -1,4 +1,4 @@
-package com.lachonete.gerenciadorpedidos.adapters.out.repository;
+package com.lachonete.gerenciadorpedidos.adapters.out.repository.customer;
 
 import com.lachonete.gerenciadorpedidos.adapters.out.repository.mapper.CustomerEntityMapper;
 import com.lachonete.gerenciadorpedidos.application.core.domain.entity.Customer;
