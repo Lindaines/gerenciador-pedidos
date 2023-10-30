@@ -14,7 +14,6 @@ import java.util.Objects;
 public class OrderItemEntityId implements Serializable {
 
     private Long id;
-    @JsonBackReference
     private OrderEntity order;
 
     @Override

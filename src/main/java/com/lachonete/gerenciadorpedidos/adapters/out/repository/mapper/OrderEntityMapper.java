@@ -10,6 +10,8 @@ import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.Prod
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 public class OrderEntityMapper {
 
@@ -18,9 +20,14 @@ public class OrderEntityMapper {
     public OrderEntity toOrderEntity(Order order) {
         var orderItemsEntity = order.getItems().stream().map(orderItem -> orderItemEntityMapper.toOrderItemEntity(orderItem)).toList();
 
-        return OrderEntity.builder()
+        var orderEntity = OrderEntity.builder()
                 .orderStatus(order.getOrderStatus())
-                //.price(order.getPrice().getAmount())
-                .items(orderItemsEntity).build();
+                .price(BigDecimal.valueOf(10))
+                .items(orderItemsEntity)
+                .pickUpCode(123123L)
+                . build();
+
+        orderEntity.getItems().forEach(orderItemEntity -> orderItemEntity.setOrder(orderEntity));
+        return orderEntity;
     }
 }

@@ -4,9 +4,12 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/lanchonete
+    url: jdbc:postgresql://localhost:5432/lanchonete?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+
     username: postgres
     password: postgres
+    schema: classpath:init-schema.sql
+    initialization-mode: always
   jpa:
     hibernate:
       ddl-auto: update

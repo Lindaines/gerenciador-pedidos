@@ -23,27 +23,15 @@ public class OrderEntity {
     private UUID id;
 
     private BigDecimal price;
-    @Transient
+
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
+
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
     private Long pickUpCode;
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "order", cascade = CascadeType.MERGE)
-    private List<OrderItemEntity> items;
+    //@JsonManagedReference
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<OrderItemEntity> items = new ArrayList<>();
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrderEntity that = (OrderEntity) o;
-        return id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }
