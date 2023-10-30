@@ -43,8 +43,8 @@ public class ProductController {
     }
 
     @GetMapping("/find")
-    public ResponseEntity<List<ProductResponse>> findByCategory(@RequestParam(name = "category") final String category) {
-        var products = listProductsByCategoryInputPort.find(ProductCategory.valueOf(category));
+    public ResponseEntity<List<ProductResponse>> findByCategory(@RequestParam(name = "category") final ProductCategory category) {
+        var products = listProductsByCategoryInputPort.find(category);
         var productsResponse = products.stream().map(product -> productMapper.toProductResponse(product)).toList();
         return ResponseEntity.ok().body(productsResponse);
     }

@@ -1,7 +1,5 @@
 package com.lachonete.gerenciadorpedidos.adapters.out.repository.entity;
 
-import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.Image;
-import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.Money;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.ProductCategory;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,7 +26,8 @@ public class ProductEntity {
     private String name;
     private String description;
     private BigDecimal price;
-    private String category;
+    @Enumerated(EnumType.STRING)
+    private ProductCategory category;
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "images", joinColumns = @JoinColumn(name = "id"))
     @Column(name = "image", nullable = false)

@@ -18,6 +18,6 @@ public class ProductRequest {
     private String description;
     private BigDecimal price;
     @NotBlank
-    private String category;
+    private ProductCategory category;
     private List<String> images;
 }

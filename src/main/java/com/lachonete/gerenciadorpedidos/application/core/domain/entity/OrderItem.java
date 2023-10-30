@@ -3,97 +3,105 @@ package com.lachonete.gerenciadorpedidos.application.core.domain.entity;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.Money;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.OrderId;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.OrderItemId;
+import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.ProductId;
 
 public class OrderItem extends BaseEntity<OrderItemId> {
     private OrderId orderId;
-    private final Product product;
-    private final int quantity;
-    private final Money price;
-    private final Money subTotal;
-
-    void initializeOrderItem(OrderId orderId, OrderItemId orderItemId) {
-        this.orderId = orderId;
-        super.setId(orderItemId);
-    }
-
-    boolean isPriceValid() {
-        return price.isGreaterThanZero() &&
-                price.equals(product.getPrice()) &&
-                price.multiply(quantity).equals(subTotal);
-    }
-
-    private OrderItem(Builder builder) {
-        super.setId(builder.orderItemId);
-        product = builder.product;
-        quantity = builder.quantity;
-        price = builder.price;
-        subTotal = builder.subTotal;
-    }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
+    private ProductId productId;
+    private  int quantity;
+    private  Money subTotal;
 
     public OrderId getOrderId() {
         return orderId;
     }
 
-    public Product getProduct() {
-        return product;
+    public ProductId getProductId() {
+        return productId;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public Money getPrice() {
-        return price;
-    }
-
     public Money getSubTotal() {
         return subTotal;
     }
 
-    public static final class Builder {
-        private OrderItemId orderItemId;
-        private Product product;
+    void initializeOrderItem(OrderId orderId, OrderItemId orderItemId) {
+        this.orderId = orderId;
+        super.setId(orderItemId);
+    }
+
+
+    public static final class OrderItemBuilder {
+        private OrderItemId id;
+        private OrderId orderId;
+        private ProductId productId;
         private int quantity;
-        private Money price;
         private Money subTotal;
-
-        private Builder() {
+        public OrderItemId getId() {
+            return id;
         }
 
-        public Builder orderItemId(OrderItemId val) {
-            orderItemId = val;
+        public OrderId getOrderId() {
+            return orderId;
+        }
+
+        public ProductId getProductId() {
+            return productId;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+
+        public Money getSubTotal() {
+            return subTotal;
+        }
+
+
+
+        private OrderItemBuilder() {
+        }
+
+        public static OrderItemBuilder anOrderItem() {
+            return new OrderItemBuilder();
+        }
+
+        public OrderItemBuilder withId(OrderItemId id) {
+            this.id = id;
             return this;
         }
 
-        public Builder product(Product val) {
-            product = val;
+        public OrderItemBuilder withOrderId(OrderId orderId) {
+            this.orderId = orderId;
             return this;
         }
 
-        public Builder quantity(int val) {
-            quantity = val;
+        public OrderItemBuilder withProductId(ProductId productId) {
+            this.productId = productId;
             return this;
         }
 
-        public Builder price(Money val) {
-            price = val;
+        public OrderItemBuilder withQuantity(int quantity) {
+            this.quantity = quantity;
             return this;
         }
 
-        public Builder subTotal(Money val) {
-            subTotal = val;
+        public OrderItemBuilder withSubTotal(Money subTotal) {
+            this.subTotal = subTotal;
             return this;
         }
 
         public OrderItem build() {
-            return new OrderItem(this);
+            OrderItem orderItem = new OrderItem();
+            orderItem.setId(id);
+            orderItem.subTotal = this.subTotal;
+            orderItem.quantity = this.quantity;
+            orderItem.orderId = this.orderId;
+            orderItem.productId = this.productId;
+            return orderItem;
         }
     }
-
-
 }

@@ -18,13 +18,8 @@ public class ListProductsByCategoryAdapter implements ListProductsByCategoryOutp
 
     @Override
     public List<Product> find(ProductCategory category) {
-        var productEntities =  productRepository.findByCategory(category.toString());
+        var productEntities =  productRepository.findByCategory(category);
         return productEntities.stream().map(productEntity -> productEntityMapper.toProduct(productEntity)).toList();
     }
 
-//    @Override
-//    public void create(Product product) {
-//        var productEntity = productEntityMapper.toProductEntity(product);
-//        productRepository.save(productEntity);
-//    }
 }

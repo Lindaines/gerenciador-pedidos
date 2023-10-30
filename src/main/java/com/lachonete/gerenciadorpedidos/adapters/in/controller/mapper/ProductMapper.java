@@ -23,7 +23,7 @@ public class ProductMapper {
                 .withName(name)
                 .withDescription(description)
                 .withPrice(price)
-                .withCategory(ProductCategory.valueOf(category))
+                .withCategory(category)
                 .withImages(images).build();
     }
 

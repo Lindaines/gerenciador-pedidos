@@ -16,7 +16,7 @@ public class ProductEntityMapper {
                 .name(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice().getAmount())
-                .category(product.getCategory().toString())
+                .category(product.getCategory())
                 .images(images).build();
     }
 
@@ -25,7 +25,7 @@ public class ProductEntityMapper {
         return Product.ProductBuilder.aProduct()
                 .withId(new ProductId(productEntity.getId()))
                 .withName(productEntity.getName())
-                .withCategory(ProductCategory.valueOf(productEntity.getCategory()))
+                .withCategory(productEntity.getCategory())
                 .withPrice(new Money(productEntity.getPrice()))
                 .withDescription(productEntity.getDescription())
                 .withImages(images)
