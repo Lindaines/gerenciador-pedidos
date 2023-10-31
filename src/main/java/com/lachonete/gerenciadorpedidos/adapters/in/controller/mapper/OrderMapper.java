@@ -2,6 +2,7 @@ package com.lachonete.gerenciadorpedidos.adapters.in.controller.mapper;
 
 import com.lachonete.gerenciadorpedidos.adapters.in.controller.request.OrderItemRequest;
 import com.lachonete.gerenciadorpedidos.adapters.in.controller.request.OrderRequest;
+import com.lachonete.gerenciadorpedidos.adapters.in.controller.response.OrderResponse;
 import com.lachonete.gerenciadorpedidos.application.core.domain.entity.Order;
 import com.lachonete.gerenciadorpedidos.application.core.domain.entity.OrderItem;
 import com.lachonete.gerenciadorpedidos.application.core.domain.entity.Product;
@@ -20,5 +21,12 @@ public class OrderMapper {
     public Order toOrder(OrderRequest orderRequest) {
         var orderItems = orderRequest.getItems().stream().map(orderItemRequest -> orderItemMapper.toOrderItem(orderItemRequest)).toList();
         return Order.OrderBuilder.anOrder().withItems(orderItems).build();
+    }
+
+    public OrderResponse toOrderResponse(Order order){
+        return OrderResponse.builder().id(order.getId().getValue())
+                .price(order.getPrice().getAmount())
+                .status(order.getOrderStatus().toString())
+                .build();
     }
 }

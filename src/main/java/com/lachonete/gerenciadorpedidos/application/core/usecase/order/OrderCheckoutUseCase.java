@@ -26,7 +26,6 @@ public class OrderCheckoutUseCase implements OrderCheckoutInputPort {
         validateOrderItemsInfo(order);
         var orderSaved = orderCheckoutOutputPort.persist(order);
         order.initializeOrder();
-        //order.getItems().forEach(this::loadPriceProductsInfo);
         return orderSaved.getId();
     }
 

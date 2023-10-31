@@ -28,11 +28,7 @@ public class OrderEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-//    @Column(name = "pickup_code", nullable = false, unique = true, updatable = false, insertable = false)
-//    @GeneratedValue(generator = "sequence", strategy = GenerationType.AUTO)
-//    private Long pickUpCode;
 
-    //@JsonManagedReferencez
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItemEntity> items = new ArrayList<>();
 
