@@ -30,7 +30,9 @@ public class Order extends AggregateRoot<OrderId>{
         return orderStatus;
     }
 
-
+    public void initializeOrder(){
+        this.orderStatus = OrderStatus.CRIADO;
+    }
     public static final class OrderBuilder {
         private OrderId orderId;
 
@@ -62,6 +64,8 @@ public class Order extends AggregateRoot<OrderId>{
 
         private OrderBuilder() {
         }
+
+
 
         public static OrderBuilder anOrder() {
             return new OrderBuilder();

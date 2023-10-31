@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.OrderStatus;
 import javax.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.math.BigDecimal;
@@ -27,10 +28,11 @@ public class OrderEntity {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    @GeneratedValue (strategy = GenerationType.SEQUENCE)
-    private Long pickUpCode;
+//    @Column(name = "pickup_code", nullable = false, unique = true, updatable = false, insertable = false)
+//    @GeneratedValue(generator = "sequence", strategy = GenerationType.AUTO)
+//    private Long pickUpCode;
 
-    //@JsonManagedReference
+    //@JsonManagedReferencez
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItemEntity> items = new ArrayList<>();
 

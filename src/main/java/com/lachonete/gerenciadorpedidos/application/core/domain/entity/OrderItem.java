@@ -3,20 +3,23 @@ package com.lachonete.gerenciadorpedidos.application.core.domain.entity;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.Money;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.OrderId;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.OrderItemId;
-import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.ProductId;
 
 public class OrderItem extends BaseEntity<OrderItemId> {
     private OrderId orderId;
-    private ProductId productId;
+
+    private Product product;
     private  int quantity;
     private  Money subTotal;
-
     public OrderId getOrderId() {
         return orderId;
     }
 
-    public ProductId getProductId() {
-        return productId;
+    public void setOrderId(OrderId orderId) {
+        this.orderId = orderId;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 
     public int getQuantity() {
@@ -25,6 +28,10 @@ public class OrderItem extends BaseEntity<OrderItemId> {
 
     public Money getSubTotal() {
         return subTotal;
+    }
+
+    public void setSubTotal (Product product, int quantity){
+        this.subTotal = product.getPrice().multiply(quantity);
     }
 
     void initializeOrderItem(OrderId orderId, OrderItemId orderItemId) {
@@ -36,7 +43,7 @@ public class OrderItem extends BaseEntity<OrderItemId> {
     public static final class OrderItemBuilder {
         private OrderItemId id;
         private OrderId orderId;
-        private ProductId productId;
+        private Product product;
         private int quantity;
         private Money subTotal;
         public OrderItemId getId() {
@@ -47,8 +54,8 @@ public class OrderItem extends BaseEntity<OrderItemId> {
             return orderId;
         }
 
-        public ProductId getProductId() {
-            return productId;
+        public Product getProductId() {
+            return product;
         }
 
         public int getQuantity() {
@@ -79,8 +86,8 @@ public class OrderItem extends BaseEntity<OrderItemId> {
             return this;
         }
 
-        public OrderItemBuilder withProductId(ProductId productId) {
-            this.productId = productId;
+        public OrderItemBuilder withProduct(Product product) {
+            this.product = product;
             return this;
         }
 
@@ -100,7 +107,7 @@ public class OrderItem extends BaseEntity<OrderItemId> {
             orderItem.subTotal = this.subTotal;
             orderItem.quantity = this.quantity;
             orderItem.orderId = this.orderId;
-            orderItem.productId = this.productId;
+            orderItem.product = this.product;
             return orderItem;
         }
     }

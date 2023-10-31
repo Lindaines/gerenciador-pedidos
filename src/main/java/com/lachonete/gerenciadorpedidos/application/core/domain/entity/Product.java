@@ -6,6 +6,7 @@ import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.Prod
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.ProductId;
 
 import java.util.List;
+import java.util.UUID;
 
 public class Product extends BaseEntity<ProductId> {
     private String name;
@@ -13,6 +14,14 @@ public class Product extends BaseEntity<ProductId> {
     private Money price;
     private ProductCategory category;
     private List<Image> images;
+
+    public Product(ProductId productId) {
+        this.setId(productId);
+    }
+
+    public Product() {
+        super();
+    }
 
     public String getName() {
         return name;

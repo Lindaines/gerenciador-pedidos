@@ -22,12 +22,10 @@ public class OrderCheckoutAdapter implements OrderCheckoutOutputPort {
 
 
     @Override
-    public OrderId checkout(Order order) {
+    public Order persist(Order order) {
         var orderEntity = orderEntityMapper.toOrderEntity(order);
         orderEntity.setOrderStatus(OrderStatus.CRIADO);
         OrderEntity orderEntityCreated = orderRepository.save(orderEntity);
-        //orderItemRepository.saveAll(orderEntity.getItems());
-        //orderEntityCreated.setItems(orderEntity.getItems());
-        return new OrderId(orderEntityCreated.getId());
+        return orderEntityMapper.toOrder(orderEntityCreated);
     }
 }

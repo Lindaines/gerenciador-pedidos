@@ -20,7 +20,6 @@ CREATE TABLE "order".products
 );
 
 
-
 DROP TYPE IF EXISTS order_status;
 CREATE TYPE order_status AS ENUM ('CRIADO', 'AGUARDANDO_PAGAMENTO', 'RECEBIDO', 'EM_PREPARACAO', 'PRONTO', 'FINALIZADO');
 
@@ -59,7 +58,6 @@ ALTER TABLE "order".order_items
     ON UPDATE NO ACTION
     ON DELETE CASCADE
     NOT VALID;
-
 
 DROP TABLE IF EXISTS "order".customers CASCADE;
 
