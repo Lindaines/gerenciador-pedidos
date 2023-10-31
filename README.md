@@ -10,7 +10,7 @@ O sistema usa
 
 ## Dependências
 Esse projeto possui dependências de terceiros, para checar quais
-e a versão correta de cada um, por favor confira no arquivo build.gradle
+e a versão correta de cada uma, por favor confira no arquivo build.gradle
 
 **Note**
 Lombok e dependências de framework não estão sendo usados na camada de domínio da aplicação!
