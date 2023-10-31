@@ -5,14 +5,15 @@ import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.Mone
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.OrderId;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.OrderStatus;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-public class Order extends AggregateRoot<OrderId>{
+public class Order extends AggregateRoot<OrderId> {
     private Money price;
+
     private List<OrderItem> items;
     private Long pickupCode;
     private OrderStatus orderStatus;
-
 
     public Money getPrice() {
         return price;
@@ -30,9 +31,20 @@ public class Order extends AggregateRoot<OrderId>{
         return orderStatus;
     }
 
-    public void initializeOrder(){
+    public void setPrice(Money price) {
+        this.price = price;
+    }
+
+    public void initializeOrder() {
         this.orderStatus = OrderStatus.CRIADO;
     }
+
+    public void setPriceInfo(Order order) {
+        List<BigDecimal> subTotal = order.getItems().stream().map(orderItem -> orderItem.getSubTotal().getAmount()).toList();
+        BigDecimal total = subTotal.stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+        order.setPrice(new Money(total));
+    }
+
     public static final class OrderBuilder {
         private OrderId orderId;
 
@@ -64,7 +76,6 @@ public class Order extends AggregateRoot<OrderId>{
 
         private OrderBuilder() {
         }
-
 
 
         public static OrderBuilder anOrder() {

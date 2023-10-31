@@ -22,10 +22,15 @@ public class OrderCheckoutUseCase implements OrderCheckoutInputPort {
 
     @Override
     public OrderId checkout(Order order) {
-        order.initializeOrder();
+        loadOrderPriceInfo(order);
         var orderSaved = orderCheckoutOutputPort.persist(order);
-        order.getItems().forEach(this::loadPriceProductsInfo);
+        order.initializeOrder();
+        //order.getItems().forEach(this::loadPriceProductsInfo);
         return orderSaved.getId();
+    }
+
+    void loadOrderPriceInfo (Order order){
+        order.setPriceInfo(order);
     }
 
     @Override

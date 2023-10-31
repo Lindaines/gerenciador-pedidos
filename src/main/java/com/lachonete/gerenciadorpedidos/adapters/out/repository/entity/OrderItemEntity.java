@@ -22,15 +22,16 @@ public class OrderItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @Id
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ORDER_ID")
     @JsonIgnore
-    //@JoinColumn(name = "ORDER_ID")
     private OrderEntity order;
 
-//    @OneToOne
-//    @JoinColumn(name="PRODUCT_ID")
+//    @ManyToOne(cascade = CascadeType.MERGE)
+//    @JoinColumn(name="PRODUCT_ID", nullable = false, updatable = false, insertable = false)
+//   // @JoinColumn(name="PRODUCT_ID", nullable = false, updatable = false, insertable = false)
 //    private ProductEntity product;
 
 //    @OneToOne(cascade = CascadeType.ALL)
@@ -40,6 +41,8 @@ public class OrderItemEntity {
     private UUID productId;
 
     private BigDecimal subTotal;
+    private BigDecimal price;
+
     private int  quantity;
 
     @Override

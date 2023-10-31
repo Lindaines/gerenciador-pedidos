@@ -19,6 +19,7 @@ public class Product extends BaseEntity<ProductId> {
         this.setId(productId);
     }
 
+
     public Product() {
         super();
     }

@@ -33,5 +33,7 @@ public class ProductEntity {
     @Column(name = "image", nullable = false)
     private List<String> images;
 
-
+    public ProductEntity(UUID id) {
+        this.id = id;
+    }
 }
