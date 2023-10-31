@@ -30,7 +30,7 @@ public class CustomerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerResponse> findById(@PathVariable final UUID id) {
+    public ResponseEntity<CustomerResponse> identifyCustomer(@PathVariable final UUID id) {
         var customerId = new CustomerId(id);
         var customer = identifyCustomerInputPort.getCustomer(customerId);
         if (customer.isEmpty()){
