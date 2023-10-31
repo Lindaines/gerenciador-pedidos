@@ -1,5 +1,6 @@
 package com.lachonete.gerenciadorpedidos.application.core.domain.entity;
 
+import com.lachonete.gerenciadorpedidos.application.core.domain.exception.InconsistencePriceException;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.Money;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.OrderId;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.OrderItemId;
@@ -43,6 +44,12 @@ public class OrderItem extends BaseEntity<OrderItemId> {
     void initializeOrderItem(OrderId orderId, OrderItemId orderItemId) {
         this.orderId = orderId;
         super.setId(orderItemId);
+    }
+
+    public void validatePriceInfo(Money productPrice) {
+         if (this.price.getAmount().compareTo(productPrice.getAmount()) != 0){
+             throw new InconsistencePriceException("The product price is wrong");
+         }
     }
 
 

@@ -12,4 +12,5 @@ public interface OrderCheckoutInputPort {
     OrderId checkout(Order order);
 
     void loadPriceProductsInfo (OrderItem orderitem);
+    void validateOrderItemsInfo (Order order);
 }

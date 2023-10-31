@@ -22,16 +22,14 @@ public class OrderCheckoutUseCase implements OrderCheckoutInputPort {
 
     @Override
     public OrderId checkout(Order order) {
-        loadOrderPriceInfo(order);
+        order.setPriceInfo(order);
+        validateOrderItemsInfo(order);
         var orderSaved = orderCheckoutOutputPort.persist(order);
         order.initializeOrder();
         //order.getItems().forEach(this::loadPriceProductsInfo);
         return orderSaved.getId();
     }
 
-    void loadOrderPriceInfo (Order order){
-        order.setPriceInfo(order);
-    }
 
     @Override
     public void loadPriceProductsInfo(OrderItem orderitem) {
@@ -41,6 +39,18 @@ public class OrderCheckoutUseCase implements OrderCheckoutInputPort {
             orderitem.setSubTotal(p, orderitem.getQuantity());
         }
     }
+@Override
+    public void validateOrderItemsInfo(Order order) {
+        order.getItems().forEach(orderItem -> {
+            var product = findProductOutputPort.find(orderItem.getProduct());
+            if (product.isPresent()){
+                var productPrice = product.get().getPrice();
+                orderItem.validatePriceInfo(productPrice);
+            }
+        });
+    }
+
+
 
 
 }
