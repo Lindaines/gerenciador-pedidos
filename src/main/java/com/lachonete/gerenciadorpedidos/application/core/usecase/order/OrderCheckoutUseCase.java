@@ -3,6 +3,7 @@ package com.lachonete.gerenciadorpedidos.application.core.usecase.order;
 import com.lachonete.gerenciadorpedidos.application.core.domain.entity.Order;
 import com.lachonete.gerenciadorpedidos.application.core.domain.entity.OrderItem;
 import com.lachonete.gerenciadorpedidos.application.core.domain.entity.Product;
+import com.lachonete.gerenciadorpedidos.application.core.domain.exception.ProductNotFoundException;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.OrderId;
 import com.lachonete.gerenciadorpedidos.application.ports.in.order.OrderCheckoutInputPort;
 import com.lachonete.gerenciadorpedidos.application.ports.out.order.OrderCheckoutOutputPort;
@@ -23,7 +24,7 @@ public class OrderCheckoutUseCase implements OrderCheckoutInputPort {
     @Override
     public OrderId checkout(Order order) {
         order.setPriceInfo(order);
-        validateOrderItemsInfo(order);
+        validateOrderItemInfo(order);
         var orderSaved = orderCheckoutOutputPort.persist(order);
         order.initializeOrder();
         return orderSaved.getId();
@@ -39,17 +40,18 @@ public class OrderCheckoutUseCase implements OrderCheckoutInputPort {
         }
     }
 @Override
-    public void validateOrderItemsInfo(Order order) {
+    public void validateOrderItemInfo(Order order) {
         order.getItems().forEach(orderItem -> {
             var product = findProductOutputPort.find(orderItem.getProduct());
-            if (product.isPresent()){
-                var productPrice = product.get().getPrice();
-                orderItem.validatePriceInfo(productPrice);
+            if (product.isEmpty()) {
+                throw new ProductNotFoundException("Product not found");
             }
+            var productPrice = product.get().getPrice();
+            var quantity = orderItem.getQuantity();
+            orderItem.validatePriceInfo(productPrice);
+            orderItem.validateSubtotal(productPrice, quantity);
         });
     }
-
-
 
 
 }

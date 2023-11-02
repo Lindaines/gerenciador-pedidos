@@ -1,6 +1,7 @@
 package com.lachonete.gerenciadorpedidos.application.core.domain.entity;
 
-import com.lachonete.gerenciadorpedidos.application.core.domain.exception.InconsistencePriceException;
+import com.lachonete.gerenciadorpedidos.application.core.domain.exception.InconsistenceOrderItemSubtotalException;
+import com.lachonete.gerenciadorpedidos.application.core.domain.exception.InconsistenceProductPriceException;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.Money;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.OrderId;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.OrderItemId;
@@ -48,8 +49,15 @@ public class OrderItem extends BaseEntity<OrderItemId> {
 
     public void validatePriceInfo(Money productPrice) {
          if (this.price.getAmount().compareTo(productPrice.getAmount()) != 0){
-             throw new InconsistencePriceException("The product price is wrong");
+             throw new InconsistenceProductPriceException("The product price is incorrect");
          }
+    }
+
+    public void validateSubtotal(Money productPrice, int quantity) {
+      var subtotal = productPrice.multiply(quantity);
+      if (subtotal.getAmount().compareTo(this.subTotal.getAmount()) !=0){
+          throw new InconsistenceOrderItemSubtotalException("The product price is incorrect");
+      }
     }
 
 
