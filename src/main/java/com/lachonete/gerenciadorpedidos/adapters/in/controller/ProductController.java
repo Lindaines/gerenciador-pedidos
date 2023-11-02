@@ -5,12 +5,10 @@ import com.lachonete.gerenciadorpedidos.adapters.in.controller.request.ProductRe
 import com.lachonete.gerenciadorpedidos.adapters.in.controller.response.ProductResponse;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.ProductCategory;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.ProductId;
-import com.lachonete.gerenciadorpedidos.application.ports.in.product.CreateProductInputPort;
-import com.lachonete.gerenciadorpedidos.application.ports.in.product.DeleteProductInputPort;
-import com.lachonete.gerenciadorpedidos.application.ports.in.product.ListProductsByCategoryInputPort;
+import com.lachonete.gerenciadorpedidos.application.ports.in.product.*;
+
 import javax.validation.Valid;
 
-import com.lachonete.gerenciadorpedidos.application.ports.in.product.UpdateProductInputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +27,8 @@ public class ProductController {
     private DeleteProductInputPort deleteProductInputPort;
     @Autowired
     private ListProductsByCategoryInputPort listProductsByCategoryInputPort;
+    @Autowired
+    private FindProductByIdInputPort findProductByIdInputPort;
     @Autowired
     private ProductMapper productMapper;
 
@@ -69,6 +69,13 @@ public class ProductController {
     public ResponseEntity<List<ProductResponse>> findByCategory(@RequestParam(name = "category") final ProductCategory category) {
         var products = listProductsByCategoryInputPort.find(category);
         var productsResponse = products.stream().map(product -> productMapper.toProductResponse(product)).toList();
+        return ResponseEntity.ok().body(productsResponse);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponse> findById(@PathVariable final UUID id) {
+        var product = findProductByIdInputPort.findById(new ProductId(id));
+        var productsResponse = productMapper.toProductResponse(product);
         return ResponseEntity.ok().body(productsResponse);
     }
 
