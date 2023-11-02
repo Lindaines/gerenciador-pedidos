@@ -8,11 +8,15 @@ import com.lachonete.gerenciadorpedidos.adapters.in.controller.response.Customer
 import com.lachonete.gerenciadorpedidos.adapters.in.controller.response.ProductResponse;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.CustomerId;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.ProductCategory;
+import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.ProductId;
 import com.lachonete.gerenciadorpedidos.application.ports.in.customer.CreateCustomerInputPort;
 import com.lachonete.gerenciadorpedidos.application.ports.in.customer.IdentifyCustomerInputPort;
 import com.lachonete.gerenciadorpedidos.application.ports.in.product.CreateProductInputPort;
 import com.lachonete.gerenciadorpedidos.application.ports.in.product.ListProductsByCategoryInputPort;
 import javax.validation.Valid;
+
+import com.lachonete.gerenciadorpedidos.application.ports.in.product.UpdateProductInputPort;
+import com.lachonete.gerenciadorpedidos.application.ports.out.product.UpdateProductOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +30,8 @@ public class ProductController {
     @Autowired
     private CreateProductInputPort createProductInputPort;
     @Autowired
+    private UpdateProductInputPort updateProductInputPort;
+    @Autowired
     private ListProductsByCategoryInputPort listProductsByCategoryInputPort;
     @Autowired
     private ProductMapper productMapper;
@@ -35,6 +41,18 @@ public class ProductController {
         try {
             var product = productMapper.toProduct(productRequest);
             createProductInputPort.create(product);
+            return ResponseEntity.ok().build();
+        } catch (Exception IllegalArgumentException) {
+            return ResponseEntity.badRequest().build();
+        }
+
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable final UUID id, @Valid @RequestBody ProductRequest productRequest) {
+        try {
+            var product = productMapper.toProduct(productRequest);
+            product.setId(new ProductId(id));
+            updateProductInputPort.update(product);
             return ResponseEntity.ok().build();
         } catch (Exception IllegalArgumentException) {
             return ResponseEntity.badRequest().build();

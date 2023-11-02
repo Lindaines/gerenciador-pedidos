@@ -10,10 +10,31 @@ import java.util.UUID;
 
 public class Product extends BaseEntity<ProductId> {
     private String name;
+
     private String description;
+
     private Money price;
     private ProductCategory category;
     private List<Image> images;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(Money price) {
+        this.price = price;
+    }
+
+    public void setCategory(ProductCategory category) {
+        this.category = category;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
 
     public Product(ProductId productId) {
         this.setId(productId);
