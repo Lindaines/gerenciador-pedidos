@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface FindProductOutputPort {
     Optional<Product> find(Product product);
+    Optional<Product> findById(ProductId productId);
 }

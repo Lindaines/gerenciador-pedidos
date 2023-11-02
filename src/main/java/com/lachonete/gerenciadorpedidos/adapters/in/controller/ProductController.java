@@ -1,22 +1,16 @@
 package com.lachonete.gerenciadorpedidos.adapters.in.controller;
 
-import com.lachonete.gerenciadorpedidos.adapters.in.controller.mapper.CustomerMapper;
 import com.lachonete.gerenciadorpedidos.adapters.in.controller.mapper.ProductMapper;
-import com.lachonete.gerenciadorpedidos.adapters.in.controller.request.CustomerRequest;
 import com.lachonete.gerenciadorpedidos.adapters.in.controller.request.ProductRequest;
-import com.lachonete.gerenciadorpedidos.adapters.in.controller.response.CustomerResponse;
 import com.lachonete.gerenciadorpedidos.adapters.in.controller.response.ProductResponse;
-import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.CustomerId;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.ProductCategory;
 import com.lachonete.gerenciadorpedidos.application.core.domain.valueobject.ProductId;
-import com.lachonete.gerenciadorpedidos.application.ports.in.customer.CreateCustomerInputPort;
-import com.lachonete.gerenciadorpedidos.application.ports.in.customer.IdentifyCustomerInputPort;
 import com.lachonete.gerenciadorpedidos.application.ports.in.product.CreateProductInputPort;
+import com.lachonete.gerenciadorpedidos.application.ports.in.product.DeleteProductInputPort;
 import com.lachonete.gerenciadorpedidos.application.ports.in.product.ListProductsByCategoryInputPort;
 import javax.validation.Valid;
 
 import com.lachonete.gerenciadorpedidos.application.ports.in.product.UpdateProductInputPort;
-import com.lachonete.gerenciadorpedidos.application.ports.out.product.UpdateProductOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +25,8 @@ public class ProductController {
     private CreateProductInputPort createProductInputPort;
     @Autowired
     private UpdateProductInputPort updateProductInputPort;
+    @Autowired
+    private DeleteProductInputPort deleteProductInputPort;
     @Autowired
     private ListProductsByCategoryInputPort listProductsByCategoryInputPort;
     @Autowired
@@ -57,7 +53,16 @@ public class ProductController {
         } catch (Exception IllegalArgumentException) {
             return ResponseEntity.badRequest().build();
         }
+    }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable final UUID id) {
+        try {
+            deleteProductInputPort.delete(new ProductId(id));
+            return ResponseEntity.ok().build();
+        } catch (Exception IllegalArgumentException) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping("/find")

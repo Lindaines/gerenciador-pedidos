@@ -22,5 +22,10 @@ public class FindProductAdapter implements FindProductOutputPort {
         return productEntity.map(entity -> productEntityMapper.toProduct(entity));
     }
 
+    @Override
+    public Optional<Product> findById(ProductId productId) {
+        var productEntity = productRepository.findById(productId.getValue());
+        return productEntity.map(entity -> productEntityMapper.toProduct(entity));
+    }
 
 }
