@@ -43,6 +43,7 @@ public class ProductController {
         }
 
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable final UUID id, @Valid @RequestBody ProductRequest productRequest) {
         try {
@@ -74,9 +75,13 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> findById(@PathVariable final UUID id) {
-        var product = findProductByIdInputPort.findById(new ProductId(id));
-        var productsResponse = productMapper.toProductResponse(product);
-        return ResponseEntity.ok().body(productsResponse);
+        try {
+            var product = findProductByIdInputPort.findById(new ProductId(id));
+            var productsResponse = productMapper.toProductResponse(product);
+            return ResponseEntity.ok().body(productsResponse);
+        } catch (Exception ProductNotFoundException) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }
