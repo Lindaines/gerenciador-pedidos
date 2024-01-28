@@ -4,7 +4,6 @@ package com.lachonete.gerenciadorpedidos.api.endpoints.addNewProduct;
 import com.lachonete.gerenciadorpedidos.ports.presenters.ProductCreatedOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.AddProduct.AddProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.AddProduct.AddProductRequest;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,11 +16,11 @@ import java.text.MessageFormat;
 
 @RestController
 @RequestMapping("/api/v1/products")
-public class AddProductEndPoint implements BaseEndpoint {
+public class AddProductEndpoint implements BaseEndpoint {
     private final AddProductInputBoundary useCase;
     private final ProductCreatedOutputBoundary presenter;
 
-    public AddProductEndPoint(AddProductInputBoundary useCase, ProductCreatedOutputBoundary presenter) {
+    public AddProductEndpoint(AddProductInputBoundary useCase, ProductCreatedOutputBoundary presenter) {
         this.useCase = useCase;
         this.presenter = presenter;
     }

@@ -5,7 +5,7 @@ import com.lachonete.gerenciadorpedidos.entities.Product;
 import com.lachonete.gerenciadorpedidos.entities.valueobject.Image;
 import com.lachonete.gerenciadorpedidos.entities.valueobject.Money;
 import com.lachonete.gerenciadorpedidos.ports.database.ProductGateway;
-import com.lachonete.gerenciadorpedidos.ports.presenters.ProcuctCreatedOutputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.presenters.ProductCreatedOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.AddProduct.AddProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.AddProduct.AddProductRequest;
 import com.lachonete.gerenciadorpedidos.ports.usescases.AddProduct.NewProductResponse;
@@ -13,10 +13,10 @@ import com.lachonete.gerenciadorpedidos.ports.usescases.AddProduct.NewProductRes
 import java.util.UUID;
 
 public class AddProduct implements AddProductInputBoundary {
-    private final ProcuctCreatedOutputBoundary presenter;
+    private final ProductCreatedOutputBoundary presenter;
     private final ProductGateway productGateway;
 
-    public AddProduct(ProcuctCreatedOutputBoundary presenter, ProductGateway productGateway) {
+    public AddProduct(ProductCreatedOutputBoundary presenter, ProductGateway productGateway) {
         this.presenter = presenter;
         this.productGateway = productGateway;
     }
@@ -35,7 +35,8 @@ public class AddProduct implements AddProductInputBoundary {
     }
 
     private boolean productAlreadyExists(final AddProductRequest request) {
-        return true;
+        // To do: Validation
+        return false;
     }
 
     private UUID addProduct(AddProductRequest request) {
