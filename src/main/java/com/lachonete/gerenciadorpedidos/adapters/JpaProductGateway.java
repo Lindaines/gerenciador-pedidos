@@ -62,8 +62,16 @@ public class JpaProductGateway implements ProductGateway {
 
     @Override
     public void update(Product product) {
-
-    }
+        ProductData productData = ProductData
+                .builder()
+                .id(product.getId().getValue())
+                .name(product.getName())
+                .description(product.getDescription())
+                .category(product.getCategory())
+                .price(product.getPrice().getAmount())
+                .images(product.getImages().stream().map(Image::toString).toList())
+                .build();
+        productRepository.save(productData);    }
 
     @Override
     public void delete(UUID id) {

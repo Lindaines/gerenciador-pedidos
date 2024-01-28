@@ -9,6 +9,7 @@ import com.lachonete.gerenciadorpedidos.ports.usescases.product.add.AddProductIn
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.GetProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.GetProductsInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.remove.RemoveProductInputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.usescases.product.udpate.UpdateProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.presenters.product.ProductCreatedPresenter;
 import com.lachonete.gerenciadorpedidos.presenters.product.ProductPresenter;
 import com.lachonete.gerenciadorpedidos.presenters.product.ProductsPresenter;
@@ -16,6 +17,7 @@ import com.lachonete.gerenciadorpedidos.usecases.product.add.AddProduct;
 import com.lachonete.gerenciadorpedidos.usecases.product.get.GetProductById;
 import com.lachonete.gerenciadorpedidos.usecases.product.get.GetProducts;
 import com.lachonete.gerenciadorpedidos.usecases.product.remove.RemoveProduct;
+import com.lachonete.gerenciadorpedidos.usecases.product.update.UpdateProduct;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,6 +51,11 @@ public class ApplicationConfiguration {
     @Bean
     public RemoveProductInputBoundary removeProductInputBoundary(Database database) {
         return new RemoveProduct(database.productGateway());
+    }
+
+    @Bean
+    public UpdateProductInputBoundary updateProductInputBoundary(Database database) {
+        return new UpdateProduct(database.productGateway());
     }
 
     @Bean
