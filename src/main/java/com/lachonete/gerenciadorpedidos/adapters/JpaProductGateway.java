@@ -9,10 +9,8 @@ import com.lachonete.gerenciadorpedidos.entities.valueobject.ProductId;
 import com.lachonete.gerenciadorpedidos.ports.database.ProductGateway;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Component
 public class JpaProductGateway implements ProductGateway {
@@ -65,6 +63,11 @@ public class JpaProductGateway implements ProductGateway {
     @Override
     public void update(Product product) {
 
+    }
+
+    @Override
+    public void delete(UUID id) {
+        productRepository.deleteById(id);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.lachonete.gerenciadorpedidos.api.endpoints.addNewProduct.exception;
+package com.lachonete.gerenciadorpedidos.api.endpoints.product.addNewProduct.exception;
 
 import lombok.Builder;
 import lombok.Getter;

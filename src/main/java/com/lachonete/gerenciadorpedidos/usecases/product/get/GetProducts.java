@@ -1,6 +1,7 @@
 package com.lachonete.gerenciadorpedidos.usecases.product.get;
 
 
+
 import com.lachonete.gerenciadorpedidos.ports.database.ProductGateway;
 import com.lachonete.gerenciadorpedidos.ports.presenters.ProductsOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.GetProductsInputBoundary;

@@ -1,4 +1,4 @@
-package com.lachonete.gerenciadorpedidos.presenters;
+package com.lachonete.gerenciadorpedidos.presenters.product;
 
 import com.lachonete.gerenciadorpedidos.ports.presenters.ProductsOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.presenters.ProductsViewModel;

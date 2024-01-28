@@ -13,6 +13,7 @@ public interface ProductGateway {
     ProductId add(Product product);
     Product getById(UUID id);
     void update(Product product);
+    void delete(UUID id);
 
     public interface BadRequest {}
     public interface NotFound {}

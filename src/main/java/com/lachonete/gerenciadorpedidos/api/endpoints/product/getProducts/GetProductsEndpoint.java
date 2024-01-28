@@ -1,4 +1,4 @@
-package com.lachonete.gerenciadorpedidos.api.endpoints.getProducts;
+package com.lachonete.gerenciadorpedidos.api.endpoints.product.getProducts;
 
 
 import com.lachonete.gerenciadorpedidos.api.endpoints.BaseEndpoint;

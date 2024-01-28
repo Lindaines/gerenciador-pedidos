@@ -19,8 +19,6 @@ import java.util.UUID;
 @Entity(name = "products")
 public class ProductData {
     @Id
-//    @GenericGenerator(name = "UUIDGenerator", strategy = "uuid2")
-//    @GeneratedValue(generator = "UUIDGenerator")
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id;
     private String name;

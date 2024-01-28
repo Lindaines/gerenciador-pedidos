@@ -1,7 +1,5 @@
-package com.lachonete.gerenciadorpedidos.api.endpoints.addNewProduct.exception;
+package com.lachonete.gerenciadorpedidos.api.endpoints.product.addNewProduct.exception;
 
-
-import com.lachonete.gerenciadorpedidos.ports.database.ProductGateway;
 
 import java.util.HashMap;
 import java.util.Map;

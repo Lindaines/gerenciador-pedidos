@@ -1,4 +1,4 @@
-package com.lachonete.gerenciadorpedidos.api.endpoints.addNewProduct;
+package com.lachonete.gerenciadorpedidos.api.endpoints.product.addNewProduct;
 
 import com.lachonete.gerenciadorpedidos.entities.valueobject.ProductCategory;
 import lombok.Data;
