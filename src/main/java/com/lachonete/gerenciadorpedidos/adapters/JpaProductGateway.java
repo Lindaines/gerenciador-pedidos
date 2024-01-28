@@ -4,12 +4,15 @@ import com.lachonete.gerenciadorpedidos.adapters.data.ProductData;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.ProductRepository;
 import com.lachonete.gerenciadorpedidos.entities.Product;
 import com.lachonete.gerenciadorpedidos.entities.valueobject.Image;
+import com.lachonete.gerenciadorpedidos.entities.valueobject.Money;
 import com.lachonete.gerenciadorpedidos.entities.valueobject.ProductId;
 import com.lachonete.gerenciadorpedidos.ports.database.ProductGateway;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class JpaProductGateway implements ProductGateway {
@@ -21,8 +24,19 @@ public class JpaProductGateway implements ProductGateway {
 
 
     @Override
-    public Collection<Product> getAll() {
-        return null;
+    public List<Product> getAll() {
+        return productRepository.findAll().stream().map(this::mapToProduct).toList();
+    }
+
+    private Product mapToProduct(ProductData productData) {
+        return  Product.ProductBuilder.aProduct()
+                .withId(new ProductId(productData.getId()))
+                .withName(productData.getName())
+                .withCategory(productData.getCategory())
+                .withPrice(new Money(productData.getPrice()))
+                .withDescription(productData.getDescription())
+                .withImages(productData.getImages().stream().map(Image::new).toList())
+                .build();
     }
 
     public ProductId add(Product product) {

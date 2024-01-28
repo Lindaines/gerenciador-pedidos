@@ -1,4 +1,4 @@
-package com.lachonete.gerenciadorpedidos.api.endpoints.addNewProduct;
+package com.lachonete.gerenciadorpedidos.api.endpoints;
 
 import com.lachonete.gerenciadorpedidos.api.endpoints.addNewProduct.exception.ErrorResponse;
 import org.springframework.http.HttpStatus;

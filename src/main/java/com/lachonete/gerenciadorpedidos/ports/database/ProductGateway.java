@@ -5,9 +5,10 @@ import com.lachonete.gerenciadorpedidos.entities.Product;
 import com.lachonete.gerenciadorpedidos.entities.valueobject.ProductId;
 
 import java.util.Collection;
+import java.util.List;
 
 public interface ProductGateway {
-    Collection<Product> getAll();
+    List<Product> getAll();
     ProductId add(Product product);
     Product getById(ProductId id);
     void update(Product product);

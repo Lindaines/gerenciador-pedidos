@@ -1,4 +1,4 @@
-package com.lachonete.gerenciadorpedidos.ports.usescases.AddProduct;
+package com.lachonete.gerenciadorpedidos.ports.usescases.product.add;
 
 public interface AddProductInputBoundary {
     void execute(AddProductRequest request);

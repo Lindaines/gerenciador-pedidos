@@ -1,4 +1,4 @@
-package com.lachonete.gerenciadorpedidos.ports.usescases.AddProduct;
+package com.lachonete.gerenciadorpedidos.ports.usescases.product.add;
 
 import com.lachonete.gerenciadorpedidos.entities.valueobject.ProductCategory;
 import lombok.AllArgsConstructor;

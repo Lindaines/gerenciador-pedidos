@@ -1,9 +1,10 @@
 package com.lachonete.gerenciadorpedidos.api.endpoints.addNewProduct;
 
 
+import com.lachonete.gerenciadorpedidos.api.endpoints.BaseEndpoint;
 import com.lachonete.gerenciadorpedidos.ports.presenters.ProductCreatedOutputBoundary;
-import com.lachonete.gerenciadorpedidos.ports.usescases.AddProduct.AddProductInputBoundary;
-import com.lachonete.gerenciadorpedidos.ports.usescases.AddProduct.AddProductRequest;
+import com.lachonete.gerenciadorpedidos.ports.usescases.product.add.AddProductInputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.usescases.product.add.AddProductRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
