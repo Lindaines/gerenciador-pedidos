@@ -2,15 +2,18 @@ package com.lachonete.gerenciadorpedidos.configuration;
 
 import com.lachonete.gerenciadorpedidos.adapters.JpaDatabase;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.CustomerRepository;
+import com.lachonete.gerenciadorpedidos.adapters.repositories.OrderRepository;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.ProductRepository;
 import com.lachonete.gerenciadorpedidos.ports.database.Database;
 import com.lachonete.gerenciadorpedidos.ports.presenters.customer.CustomerCreatedOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.presenters.customer.CustomerOutputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.presenters.order.OrderCreatedOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.presenters.product.ProductCreatedOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.presenters.product.ProductOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.presenters.product.ProductsOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.customer.add.AddCustomerInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.customer.get.GetCustomerInputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.usescases.order.CheckoutOrderInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.add.AddProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.GetProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.GetProductsInputBoundary;
@@ -18,11 +21,13 @@ import com.lachonete.gerenciadorpedidos.ports.usescases.product.remove.RemovePro
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.udpate.UpdateProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.presenters.customer.CustomerCreatedPresenter;
 import com.lachonete.gerenciadorpedidos.presenters.customer.CustomerPresenter;
+import com.lachonete.gerenciadorpedidos.presenters.order.OrderCreatedPresenter;
 import com.lachonete.gerenciadorpedidos.presenters.product.ProductCreatedPresenter;
 import com.lachonete.gerenciadorpedidos.presenters.product.ProductPresenter;
 import com.lachonete.gerenciadorpedidos.presenters.product.ProductsPresenter;
 import com.lachonete.gerenciadorpedidos.usecases.customer.add.AddCustomer;
 import com.lachonete.gerenciadorpedidos.usecases.customer.get.GetCustomerById;
+import com.lachonete.gerenciadorpedidos.usecases.order.CheckoutOrder;
 import com.lachonete.gerenciadorpedidos.usecases.product.add.AddProduct;
 import com.lachonete.gerenciadorpedidos.usecases.product.get.GetProductById;
 import com.lachonete.gerenciadorpedidos.usecases.product.get.GetProducts;
@@ -39,8 +44,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories("com.lachonete.gerenciadorpedidos.adapters.repositories")
 public class ApplicationConfiguration {
     @Bean
-    public Database database(ProductRepository productRepository, CustomerRepository customerRepository) {
-        return new JpaDatabase(productRepository, customerRepository);
+    public Database database(ProductRepository productRepository, CustomerRepository customerRepository, OrderRepository orderRepository) {
+        return new JpaDatabase(productRepository, customerRepository, orderRepository);
     }
 
     @Bean
@@ -76,6 +81,11 @@ public class ApplicationConfiguration {
     public GetCustomerInputBoundary getCustomerInputBoundary(CustomerOutputBoundary customerOutputBoundary, Database database) {
         return new GetCustomerById(customerOutputBoundary, database.customerGateway());
     }
+
+    @Bean
+    public CheckoutOrderInputBoundary addOrderInputBoundary(OrderCreatedOutputBoundary orderCreatedOutputBoundary, Database database) {
+        return new CheckoutOrder(orderCreatedOutputBoundary, database.orderGateway(), database.productGateway());
+    }
     @Bean
     public ProductCreatedOutputBoundary productCreatedOutputBoundary() {
         return new ProductCreatedPresenter();
@@ -100,4 +110,10 @@ public class ApplicationConfiguration {
     public CustomerOutputBoundary customerOutputBoundary() {
         return new CustomerPresenter();
     }
+
+    @Bean
+    public OrderCreatedOutputBoundary orderCreatedOutputBoundary() {
+        return new OrderCreatedPresenter();
+    }
+
 }

@@ -2,6 +2,7 @@ package com.lachonete.gerenciadorpedidos.api.endpoints.exception;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.lachonete.gerenciadorpedidos.entities.exception.InconsistenceOrderItemSubtotalException;
 import com.lachonete.gerenciadorpedidos.ports.database.ProductGateway;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
     private static final String MESSAGE_NOT_READABLE_ERROR_MESSAGE_PATTERN = "Invalid format for property `{0}'";
     private static final String DEFAULT_CLIENT_ERROR_MESSAGE = "A client error occurred";
     private static final String DEFAULT_NOT_FOUND_MESSAGE = "We could not find that entity";
+    private static final String PRICE_INCONSISTENCY_MESSAGE = "Sorry, we found a price inconsistency in request";
 
     @ExceptionHandler
     @ResponseBody
@@ -31,6 +33,8 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
             return getErrorResponseForStatus(throwable, HttpStatus.BAD_REQUEST, DEFAULT_CLIENT_ERROR_MESSAGE);
         } else if (throwable instanceof ProductGateway.NotFound) {
             return getErrorResponseForStatus(throwable, HttpStatus.NOT_FOUND, DEFAULT_NOT_FOUND_MESSAGE);
+        } else if (throwable instanceof InconsistenceOrderItemSubtotalException) {
+            return getErrorResponseForStatus(throwable, HttpStatus.BAD_REQUEST, PRICE_INCONSISTENCY_MESSAGE);
         } else {
             return getDefaultErrorResponse(throwable);
         }
