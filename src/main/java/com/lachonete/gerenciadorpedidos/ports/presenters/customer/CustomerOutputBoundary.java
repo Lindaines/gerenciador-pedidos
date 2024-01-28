@@ -1,9 +1,9 @@
 package com.lachonete.gerenciadorpedidos.ports.presenters.customer;
 
 
-import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.ProductResponse;
+import com.lachonete.gerenciadorpedidos.ports.usescases.customer.get.CustomerResponse;
 
 public interface CustomerOutputBoundary {
     CustomerViewModel getViewModel();
-    void present(ProductResponse responseModel);
+    void present(CustomerResponse responseModel);
 }

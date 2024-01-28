@@ -10,16 +10,19 @@ import com.lachonete.gerenciadorpedidos.ports.presenters.product.ProductCreatedO
 import com.lachonete.gerenciadorpedidos.ports.presenters.product.ProductOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.presenters.product.ProductsOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.customer.add.AddCustomerInputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.usescases.customer.get.GetCustomerInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.add.AddProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.GetProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.GetProductsInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.remove.RemoveProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.udpate.UpdateProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.presenters.customer.CustomerCreatedPresenter;
+import com.lachonete.gerenciadorpedidos.presenters.customer.CustomerPresenter;
 import com.lachonete.gerenciadorpedidos.presenters.product.ProductCreatedPresenter;
 import com.lachonete.gerenciadorpedidos.presenters.product.ProductPresenter;
 import com.lachonete.gerenciadorpedidos.presenters.product.ProductsPresenter;
 import com.lachonete.gerenciadorpedidos.usecases.customer.add.AddCustomer;
+import com.lachonete.gerenciadorpedidos.usecases.customer.get.GetCustomerById;
 import com.lachonete.gerenciadorpedidos.usecases.product.add.AddProduct;
 import com.lachonete.gerenciadorpedidos.usecases.product.get.GetProductById;
 import com.lachonete.gerenciadorpedidos.usecases.product.get.GetProducts;
@@ -69,7 +72,10 @@ public class ApplicationConfiguration {
     public AddCustomerInputBoundary addCustomerInputBoundary(CustomerCreatedOutputBoundary customerCreatedOutputBoundary, Database database) {
         return new AddCustomer(customerCreatedOutputBoundary, database.customerGateway());
     }
-
+    @Bean
+    public GetCustomerInputBoundary getCustomerInputBoundary(CustomerOutputBoundary customerOutputBoundary, Database database) {
+        return new GetCustomerById(customerOutputBoundary, database.customerGateway());
+    }
     @Bean
     public ProductCreatedOutputBoundary productCreatedOutputBoundary() {
         return new ProductCreatedPresenter();
@@ -84,9 +90,14 @@ public class ApplicationConfiguration {
     public ProductOutputBoundary productOutputBoundary() {
         return new ProductPresenter();
     }
+
     @Bean
-    public CustomerCreatedOutputBoundary customerOutputBoundary() {
+    public CustomerCreatedOutputBoundary customerCreatedOutputBoundary() {
         return new CustomerCreatedPresenter();
     }
 
+    @Bean
+    public CustomerOutputBoundary customerOutputBoundary() {
+        return new CustomerPresenter();
+    }
 }
