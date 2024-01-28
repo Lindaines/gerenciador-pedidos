@@ -5,7 +5,6 @@ package com.lachonete.gerenciadorpedidos.usecases.product.get;
 import com.lachonete.gerenciadorpedidos.entities.Product;
 import com.lachonete.gerenciadorpedidos.ports.database.ProductGateway;
 import com.lachonete.gerenciadorpedidos.ports.presenters.ProductOutputBoundary;
-import com.lachonete.gerenciadorpedidos.ports.presenters.ProductsOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.*;
 
 public class GetProductById extends GetProductBase implements GetProductInputBoundary {

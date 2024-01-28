@@ -6,4 +6,9 @@ public class Image {
     }
 
     public String urlPath;
+
+    @Override
+    public String toString() {
+        return urlPath;
+    }
 }
