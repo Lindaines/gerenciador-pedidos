@@ -1,7 +1,7 @@
 package com.lachonete.gerenciadorpedidos.presenters.product;
 
-import com.lachonete.gerenciadorpedidos.ports.presenters.ProductCreatedOutputBoundary;
-import com.lachonete.gerenciadorpedidos.ports.presenters.ProductCreatedViewModel;
+import com.lachonete.gerenciadorpedidos.ports.presenters.product.ProductCreatedOutputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.presenters.product.ProductCreatedViewModel;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.add.NewProductResponse;
 
 public class ProductCreatedPresenter implements ProductCreatedOutputBoundary{

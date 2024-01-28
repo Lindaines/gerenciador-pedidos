@@ -1,8 +1,7 @@
-package com.lachonete.gerenciadorpedidos.ports.presenters;
+package com.lachonete.gerenciadorpedidos.ports.presenters.product;
 
 
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.ProductResponse;
-import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.ProductsResponse;
 
 public interface ProductOutputBoundary {
     ProductViewModel getViewModel();

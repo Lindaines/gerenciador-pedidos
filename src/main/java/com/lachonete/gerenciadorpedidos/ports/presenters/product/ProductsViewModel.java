@@ -1,4 +1,4 @@
-package com.lachonete.gerenciadorpedidos.ports.presenters;
+package com.lachonete.gerenciadorpedidos.ports.presenters.product;
 
 import lombok.*;
 

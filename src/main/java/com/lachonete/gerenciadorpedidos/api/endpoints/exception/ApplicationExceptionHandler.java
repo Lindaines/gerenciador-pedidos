@@ -1,4 +1,4 @@
-package com.lachonete.gerenciadorpedidos.api.endpoints.product.addNewProduct.exception;
+package com.lachonete.gerenciadorpedidos.api.endpoints.exception;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;

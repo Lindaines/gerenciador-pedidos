@@ -1,6 +1,6 @@
 package com.lachonete.gerenciadorpedidos.api.endpoints;
 
-import com.lachonete.gerenciadorpedidos.api.endpoints.product.addNewProduct.exception.ErrorResponse;
+import com.lachonete.gerenciadorpedidos.api.endpoints.exception.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

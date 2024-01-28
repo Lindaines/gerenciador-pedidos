@@ -2,7 +2,7 @@ package com.lachonete.gerenciadorpedidos.api.endpoints.product.getProducts;
 
 
 import com.lachonete.gerenciadorpedidos.api.endpoints.BaseEndpoint;
-import com.lachonete.gerenciadorpedidos.ports.presenters.ProductOutputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.presenters.product.ProductOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.GetProductByIdRequest;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.GetProductInputBoundary;
 import org.springframework.http.ResponseEntity;

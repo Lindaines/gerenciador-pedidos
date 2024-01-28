@@ -5,7 +5,7 @@ import com.lachonete.gerenciadorpedidos.entities.Product;
 import com.lachonete.gerenciadorpedidos.entities.valueobject.Image;
 import com.lachonete.gerenciadorpedidos.entities.valueobject.Money;
 import com.lachonete.gerenciadorpedidos.ports.database.ProductGateway;
-import com.lachonete.gerenciadorpedidos.ports.presenters.ProductCreatedOutputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.presenters.product.ProductCreatedOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.add.AddProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.add.AddProductRequest;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.add.NewProductResponse;

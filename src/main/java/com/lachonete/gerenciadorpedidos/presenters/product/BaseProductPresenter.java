@@ -1,10 +1,7 @@
 package com.lachonete.gerenciadorpedidos.presenters.product;
 
-import com.lachonete.gerenciadorpedidos.ports.presenters.ProductViewModel;
+import com.lachonete.gerenciadorpedidos.ports.presenters.product.ProductViewModel;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.ProductResponse;
-import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.ProductsResponse;
-
-import java.time.format.DateTimeFormatter;
 
 public class BaseProductPresenter {
 
