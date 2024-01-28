@@ -1,14 +1,10 @@
 package com.lachonete.gerenciadorpedidos.adapters;
 
 import com.lachonete.gerenciadorpedidos.adapters.data.CustomerData;
-import com.lachonete.gerenciadorpedidos.adapters.data.ProductData;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.CustomerRepository;
-import com.lachonete.gerenciadorpedidos.adapters.repositories.ProductRepository;
 import com.lachonete.gerenciadorpedidos.entities.Customer;
-import com.lachonete.gerenciadorpedidos.entities.Product;
 import com.lachonete.gerenciadorpedidos.entities.valueobject.*;
 import com.lachonete.gerenciadorpedidos.ports.database.CustomerGateway;
-import com.lachonete.gerenciadorpedidos.ports.database.ProductGateway;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
