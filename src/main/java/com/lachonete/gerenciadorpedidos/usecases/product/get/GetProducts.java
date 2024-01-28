@@ -3,8 +3,7 @@ package com.lachonete.gerenciadorpedidos.usecases.product.get;
 
 import com.lachonete.gerenciadorpedidos.ports.database.ProductGateway;
 import com.lachonete.gerenciadorpedidos.ports.presenters.ProductsOutputBoundary;
-import com.lachonete.gerenciadorpedidos.ports.usescases.product.add.AddProductInputBoundary;
-import com.lachonete.gerenciadorpedidos.ports.usescases.product.add.AddProductRequest;
+import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.GetProductsInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.ProductsResponse;
 
 public class GetProducts extends GetProductBase implements GetProductsInputBoundary {

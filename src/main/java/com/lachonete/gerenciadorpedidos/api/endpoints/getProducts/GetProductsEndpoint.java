@@ -2,10 +2,8 @@ package com.lachonete.gerenciadorpedidos.api.endpoints.getProducts;
 
 
 import com.lachonete.gerenciadorpedidos.api.endpoints.BaseEndpoint;
-import com.lachonete.gerenciadorpedidos.ports.presenters.ProductCreatedOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.presenters.ProductsOutputBoundary;
-import com.lachonete.gerenciadorpedidos.ports.usescases.product.add.AddProductInputBoundary;
-import com.lachonete.gerenciadorpedidos.usecases.product.get.GetProductsInputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.GetProductsInputBoundary;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

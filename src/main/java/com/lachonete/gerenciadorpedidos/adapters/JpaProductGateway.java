@@ -56,8 +56,10 @@ public class JpaProductGateway implements ProductGateway {
     }
 
     @Override
-    public Product getById(ProductId id) {
-        return null;
+    public Product getById(UUID id) {
+        return productRepository.findById(id)
+          .map(this::mapToProduct)
+                .orElse(null);
     }
 
     @Override

@@ -1,10 +1,7 @@
 package com.lachonete.gerenciadorpedidos.presenters;
 
-import com.lachonete.gerenciadorpedidos.ports.presenters.ProductCreatedOutputBoundary;
-import com.lachonete.gerenciadorpedidos.ports.presenters.ProductCreatedViewModel;
 import com.lachonete.gerenciadorpedidos.ports.presenters.ProductsOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.presenters.ProductsViewModel;
-import com.lachonete.gerenciadorpedidos.ports.usescases.product.add.NewProductResponse;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.ProductsResponse;
 
 
