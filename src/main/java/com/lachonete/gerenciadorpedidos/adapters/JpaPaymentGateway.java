@@ -4,6 +4,7 @@ package com.lachonete.gerenciadorpedidos.adapters;
 import com.lachonete.gerenciadorpedidos.adapters.data.PaymentData;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.PaymentRepository;
 import com.lachonete.gerenciadorpedidos.entities.Payment;
+import com.lachonete.gerenciadorpedidos.entities.valueobject.PaymentStatus;
 import com.lachonete.gerenciadorpedidos.ports.database.PaymentGateway;
 import org.springframework.stereotype.Component;
 import java.util.List;
@@ -40,8 +41,19 @@ public class JpaPaymentGateway implements PaymentGateway {
 
     @Override
     public Payment getById(UUID id) {
-        return null;
+        return paymentRepository.findById(id)
+                .map(this::mapToPayment)
+                .orElse(null);
     }
+
+    @Override
+    public void updateStatus(UUID id, PaymentStatus paymentStatus) {
+        Payment payment = getById(id);
+        payment.updateStatus(paymentStatus);
+        var paymentData = this.mapToPaymentData(payment);
+        paymentRepository.save(paymentData);
+    }
+
 
 
 }

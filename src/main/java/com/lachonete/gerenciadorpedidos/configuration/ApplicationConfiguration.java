@@ -16,6 +16,7 @@ import com.lachonete.gerenciadorpedidos.ports.usescases.customer.add.AddCustomer
 import com.lachonete.gerenciadorpedidos.ports.usescases.customer.get.GetCustomerInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.order.CheckoutOrderInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.payment.add.AddPaymentInputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.usescases.payment.update.UpdatePaymentInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.add.AddProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.GetProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.GetProductsInputBoundary;
@@ -31,6 +32,7 @@ import com.lachonete.gerenciadorpedidos.usecases.customer.add.AddCustomer;
 import com.lachonete.gerenciadorpedidos.usecases.customer.get.GetCustomerById;
 import com.lachonete.gerenciadorpedidos.usecases.order.CheckoutOrder;
 import com.lachonete.gerenciadorpedidos.usecases.payment.AddPayment;
+import com.lachonete.gerenciadorpedidos.usecases.payment.UpdatePayment;
 import com.lachonete.gerenciadorpedidos.usecases.product.add.AddProduct;
 import com.lachonete.gerenciadorpedidos.usecases.product.get.GetProductById;
 import com.lachonete.gerenciadorpedidos.usecases.product.get.GetProducts;
@@ -89,7 +91,10 @@ public class ApplicationConfiguration {
     public CheckoutOrderInputBoundary addOrderInputBoundary(OrderCreatedOutputBoundary orderCreatedOutputBoundary, Database database, AddPaymentInputBoundary addPaymentInputBoundary) {
         return new CheckoutOrder(orderCreatedOutputBoundary, database.orderGateway(), database.productGateway(), addPaymentInputBoundary);
     }
-
+    @Bean
+    public UpdatePaymentInputBoundary updatePaymentInputBoundary(Database database) {
+        return new UpdatePayment(database.paymentGateway());
+    }
     @Bean
     public AddPaymentInputBoundary addPaymentInputBoundary(Database database) {
         return new AddPayment(database.paymentGateway());
