@@ -44,6 +44,5 @@ public class AddCustomer implements AddCustomerInputBoundary {
         var name = new PersonName(request.getName());
         var customer = new Customer(cpf, email, name);
         return customerGateway.add(customer).getValue();
-
     }
 }

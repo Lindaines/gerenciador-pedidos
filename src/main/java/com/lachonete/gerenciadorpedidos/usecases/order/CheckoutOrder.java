@@ -6,26 +6,42 @@ import com.lachonete.gerenciadorpedidos.entities.OrderItem;
 import com.lachonete.gerenciadorpedidos.entities.Product;
 import com.lachonete.gerenciadorpedidos.entities.valueobject.*;
 import com.lachonete.gerenciadorpedidos.ports.database.OrderGateway;
+import com.lachonete.gerenciadorpedidos.ports.database.PaymentGateway;
 import com.lachonete.gerenciadorpedidos.ports.database.ProductGateway;
 import com.lachonete.gerenciadorpedidos.ports.presenters.order.OrderCreatedOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.order.CheckoutOrderInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.order.CheckoutOrderRequest;
 import com.lachonete.gerenciadorpedidos.ports.usescases.order.CheckoutOrderResponse;
+import com.lachonete.gerenciadorpedidos.ports.usescases.payment.add.AddPaymentInputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.usescases.payment.add.AddPaymentRequest;
 
 
 public class CheckoutOrder implements CheckoutOrderInputBoundary {
     private final OrderCreatedOutputBoundary presenter;
     private final OrderGateway orderGateway;
     private final ProductGateway productGateway;
+    private final AddPaymentInputBoundary addPaymentUseCase;
 
-    public CheckoutOrder(OrderCreatedOutputBoundary presenter, OrderGateway orderGateway, ProductGateway productGateway) {
+    public CheckoutOrder(OrderCreatedOutputBoundary presenter, OrderGateway orderGateway, ProductGateway productGateway, AddPaymentInputBoundary addPaymentInputBoundary) {
         this.presenter = presenter;
         this.orderGateway = orderGateway;
         this.productGateway = productGateway;
+        this.addPaymentUseCase = addPaymentInputBoundary;
     }
 
     @Override
     public void execute(CheckoutOrderRequest request) {
+        var order = mapToOrder(request);
+        order.setPriceInfo(order);
+        validateOrderItemInfo(order);
+        order.initializeOrder();
+        var orderSaved = addOrder(order);
+        var paymentId = addPaymentUseCase.execute(AddPaymentRequest.builder().orderId(orderSaved.getId().getValue()).price(orderSaved.getPrice().getAmount()).build());
+        CheckoutOrderResponse responseModel = new CheckoutOrderResponse(orderSaved.getId().getValue(), orderSaved.getPickupCode(), paymentId);
+        presenter.present(responseModel);
+    }
+
+    private Order mapToOrder (CheckoutOrderRequest request){
         var orderItems = request.getItems().stream().map(orderItemRequest -> {
             var product = new Product(new ProductId(orderItemRequest.getProductId()));
             var price = new Money(orderItemRequest.getPrice());
@@ -37,14 +53,7 @@ public class CheckoutOrder implements CheckoutOrderInputBoundary {
                     .withPrice(price)
                     .build();
         }).toList();
-        var order = Order.OrderBuilder.anOrder().withItems(orderItems).build();
-        order.setPriceInfo(order);
-        validateOrderItemInfo(order);
-        var orderSaved = addOrder(order);
-        CheckoutOrderResponse responseModel = new CheckoutOrderResponse(orderSaved.getId().getValue(), orderSaved.getPickupCode());
-        presenter.present(responseModel);
-
-
+       return Order.OrderBuilder.anOrder().withItems(orderItems).build();
     }
     private Order addOrder(Order order) {
         return orderGateway.add(order);

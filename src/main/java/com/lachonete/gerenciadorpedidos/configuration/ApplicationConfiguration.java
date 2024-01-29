@@ -3,6 +3,7 @@ package com.lachonete.gerenciadorpedidos.configuration;
 import com.lachonete.gerenciadorpedidos.adapters.JpaDatabase;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.CustomerRepository;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.OrderRepository;
+import com.lachonete.gerenciadorpedidos.adapters.repositories.PaymentRepository;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.ProductRepository;
 import com.lachonete.gerenciadorpedidos.ports.database.Database;
 import com.lachonete.gerenciadorpedidos.ports.presenters.customer.CustomerCreatedOutputBoundary;
@@ -14,6 +15,7 @@ import com.lachonete.gerenciadorpedidos.ports.presenters.product.ProductsOutputB
 import com.lachonete.gerenciadorpedidos.ports.usescases.customer.add.AddCustomerInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.customer.get.GetCustomerInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.order.CheckoutOrderInputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.usescases.payment.add.AddPaymentInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.add.AddProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.GetProductInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.GetProductsInputBoundary;
@@ -28,6 +30,7 @@ import com.lachonete.gerenciadorpedidos.presenters.product.ProductsPresenter;
 import com.lachonete.gerenciadorpedidos.usecases.customer.add.AddCustomer;
 import com.lachonete.gerenciadorpedidos.usecases.customer.get.GetCustomerById;
 import com.lachonete.gerenciadorpedidos.usecases.order.CheckoutOrder;
+import com.lachonete.gerenciadorpedidos.usecases.payment.AddPayment;
 import com.lachonete.gerenciadorpedidos.usecases.product.add.AddProduct;
 import com.lachonete.gerenciadorpedidos.usecases.product.get.GetProductById;
 import com.lachonete.gerenciadorpedidos.usecases.product.get.GetProducts;
@@ -44,8 +47,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories("com.lachonete.gerenciadorpedidos.adapters.repositories")
 public class ApplicationConfiguration {
     @Bean
-    public Database database(ProductRepository productRepository, CustomerRepository customerRepository, OrderRepository orderRepository) {
-        return new JpaDatabase(productRepository, customerRepository, orderRepository);
+    public Database database(ProductRepository productRepository, CustomerRepository customerRepository, OrderRepository orderRepository, PaymentRepository paymentRepository) {
+        return new JpaDatabase(productRepository, customerRepository, orderRepository, paymentRepository);
     }
 
     @Bean
@@ -83,8 +86,13 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public CheckoutOrderInputBoundary addOrderInputBoundary(OrderCreatedOutputBoundary orderCreatedOutputBoundary, Database database) {
-        return new CheckoutOrder(orderCreatedOutputBoundary, database.orderGateway(), database.productGateway());
+    public CheckoutOrderInputBoundary addOrderInputBoundary(OrderCreatedOutputBoundary orderCreatedOutputBoundary, Database database, AddPaymentInputBoundary addPaymentInputBoundary) {
+        return new CheckoutOrder(orderCreatedOutputBoundary, database.orderGateway(), database.productGateway(), addPaymentInputBoundary);
+    }
+
+    @Bean
+    public AddPaymentInputBoundary addPaymentInputBoundary(Database database) {
+        return new AddPayment(database.paymentGateway());
     }
     @Bean
     public ProductCreatedOutputBoundary productCreatedOutputBoundary() {

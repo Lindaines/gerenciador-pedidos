@@ -13,6 +13,6 @@ public class OrderCreatedPresenter implements OrderCreatedOutputBoundary {
 
 
     public void present(CheckoutOrderResponse responseModel) {
-        viewModel = new OrderCreatedViewModel(responseModel.getId().toString(), responseModel.getPickupCode());
+        viewModel = new OrderCreatedViewModel(responseModel.getId().toString(), responseModel.getPickupCode(), responseModel.getPaymentId());
     }
 }

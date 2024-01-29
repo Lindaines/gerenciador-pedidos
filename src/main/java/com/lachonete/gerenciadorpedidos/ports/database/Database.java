@@ -4,4 +4,5 @@ public interface Database {
     ProductGateway productGateway();
     CustomerGateway customerGateway();
     OrderGateway orderGateway();
+    PaymentGateway paymentGateway();
 }

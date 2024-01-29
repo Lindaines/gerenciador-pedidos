@@ -51,6 +51,8 @@ public class JpaOrderGateway implements OrderGateway {
         return Order.OrderBuilder.anOrder().withItems(orderItems)
                 .withId(new OrderId(orderData.getId()))
                 .withPickupCode(orderData.getPickUpCode())
+                .withOrderStatus(orderData.getOrderStatus())
+                .withPrice(new Money(orderData.getPrice()))
                 .build();
     }
     public OrderItemData toOrderItemData(OrderItem orderItem) {
