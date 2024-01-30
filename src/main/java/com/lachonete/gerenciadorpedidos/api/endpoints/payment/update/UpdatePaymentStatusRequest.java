@@ -1,4 +1,4 @@
-package com.lachonete.gerenciadorpedidos.api.endpoints.payment;
+package com.lachonete.gerenciadorpedidos.api.endpoints.payment.update;
 
 import com.lachonete.gerenciadorpedidos.entities.valueobject.PaymentStatus;
 import lombok.Data;

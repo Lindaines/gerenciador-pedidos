@@ -1,4 +1,4 @@
-package com.lachonete.gerenciadorpedidos.usecases.payment;
+package com.lachonete.gerenciadorpedidos.usecases.payment.add;
 
 
 import com.lachonete.gerenciadorpedidos.entities.Payment;

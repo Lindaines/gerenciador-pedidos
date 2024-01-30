@@ -4,7 +4,7 @@ package com.lachonete.gerenciadorpedidos.adapters;
 import com.lachonete.gerenciadorpedidos.adapters.data.PaymentData;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.PaymentRepository;
 import com.lachonete.gerenciadorpedidos.entities.Payment;
-import com.lachonete.gerenciadorpedidos.entities.valueobject.PaymentStatus;
+import com.lachonete.gerenciadorpedidos.entities.valueobject.*;
 import com.lachonete.gerenciadorpedidos.ports.database.PaymentGateway;
 import org.springframework.stereotype.Component;
 import java.util.List;
@@ -25,12 +25,22 @@ public class JpaPaymentGateway implements PaymentGateway {
     }
 
     private Payment mapToPayment(PaymentData paymentData) {
-       return Payment.builder().build();
+       return Payment.builder()
+               .paymentId(new PaymentId(paymentData.getId()))
+               .orderId(new OrderId(paymentData.getOrderId()))
+               .price(new Money(paymentData.getPrice()))
+               .customerId(new CustomerId(paymentData.getCustomerId()))
+               .paymentStatus(paymentData.getStatus())
+               .build();
     }
 
     private PaymentData mapToPaymentData(Payment payment) {
-
-        return PaymentData.builder().build();
+        return PaymentData.builder()
+                .orderId(payment.getOrderId().getValue())
+                .customerId(payment.getCustomerId().getValue())
+                .price(payment.getPrice().getAmount())
+                .status(payment.getPaymentStatus())
+                .build();
     }
 
     public UUID add(Payment payment) {
@@ -51,6 +61,7 @@ public class JpaPaymentGateway implements PaymentGateway {
         Payment payment = getById(id);
         payment.updateStatus(paymentStatus);
         var paymentData = this.mapToPaymentData(payment);
+        paymentData.setId(payment.getId().getValue());
         paymentRepository.save(paymentData);
     }
 

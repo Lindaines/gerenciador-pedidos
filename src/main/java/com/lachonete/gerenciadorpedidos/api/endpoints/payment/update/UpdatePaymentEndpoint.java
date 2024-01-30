@@ -1,21 +1,13 @@
-package com.lachonete.gerenciadorpedidos.api.endpoints.payment;
+package com.lachonete.gerenciadorpedidos.api.endpoints.payment.update;
 
 
 import com.lachonete.gerenciadorpedidos.api.endpoints.BaseEndpoint;
-import com.lachonete.gerenciadorpedidos.api.endpoints.product.updateProduct.UpdateProductRequest;
-import com.lachonete.gerenciadorpedidos.ports.presenters.order.OrderCreatedOutputBoundary;
-import com.lachonete.gerenciadorpedidos.ports.usescases.order.CheckoutOrderInputBoundary;
-import com.lachonete.gerenciadorpedidos.ports.usescases.order.CheckoutOrderRequest;
-import com.lachonete.gerenciadorpedidos.ports.usescases.order.OrderItemRequest;
 import com.lachonete.gerenciadorpedidos.ports.usescases.payment.update.UpdatePaymentInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.payment.update.UpdatePaymentRequest;
-import com.lachonete.gerenciadorpedidos.usecases.payment.UpdatePayment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.net.URI;
-import java.text.MessageFormat;
 import java.util.UUID;
 
 @RestController

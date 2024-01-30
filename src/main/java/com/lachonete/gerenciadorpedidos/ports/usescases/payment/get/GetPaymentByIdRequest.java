@@ -10,7 +10,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Getter
-public class GetCustomerByIdRequest {
+public class GetPaymentByIdRequest {
     private UUID id;
 
 }
