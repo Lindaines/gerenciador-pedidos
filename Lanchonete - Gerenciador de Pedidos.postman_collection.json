@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "55e6ee3f-70a0-466d-9a59-85dac46301c9",
+		"name": "Lanchonete - Gerenciador de Pedidos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "468677"
+	},
+	"item": [
+		{
+			"name": "criar produto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Guarana Artemis\",\n    \"description\":\"Guarana Artemis mto bom\",\n    \"category\":\"BEBIDA\",\n    \"price\":\"5.0\",\n    \"images\" : [\"url1\", \"url2\", \"url3\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/products",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "criar cliente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Linda\",\n    \"cpf\":\"121\",\n    \"email\":\"linda@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/customers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "criar pedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"items\": [\n        {\n            \"quantity\": 3,\n            \"productId\": \"f3324c67-35db-43c8-9dfe-db520d6b67d7\",\n            \"price\":\"5.0\",\n            \"subtotal\":\"15.0\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "buscar produto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/products/06512106-00d9-4e83-b78f-73cdbb90b4eb",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"06512106-00d9-4e83-b78f-73cdbb90b4eb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "buscar clientes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/products/06512106-00d9-4e83-b78f-73cdbb90b4eb",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"06512106-00d9-4e83-b78f-73cdbb90b4eb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar pedidos (exceto finalizados)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listar produtos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/products",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(para webhook) atualizar status pagamento",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"paymentStatus\" : \"APROVADO\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/payments/52098f81-c95a-4935-bd9c-9490fcaa4ac9",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"payments",
+						"52098f81-c95a-4935-bd9c-9490fcaa4ac9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "consultar status pagamento",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/payments/7c1ac1c9-0547-4e5b-a026-23fea7e0d0c0",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"payments",
+						"7c1ac1c9-0547-4e5b-a026-23fea7e0d0c0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "atualizar status pedido",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"orderStatus\" : \"PRONTO\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/orders/957d33ac-54fd-466a-8b7d-04c55e382e73",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"orders",
+						"957d33ac-54fd-466a-8b7d-04c55e382e73"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

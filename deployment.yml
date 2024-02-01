@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fast-food-rest-api
+spec:
+  selector:
+    matchLabels:
+      app: fast-food-rest-api
+  template:
+    metadata:
+      labels:
+        app: fast-food-rest-api
+    spec:
+      containers:
+        - name: fast-food-rest-api
+          image: lindainesv49/sistema-fast-food-pos:latest
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - name: tcp
+              containerPort: 8080
+          env:
+            - name: DATABASE_URL
+              value: "pg-minikube-postgresql.default.svc.cluster.local"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fast-food-rest-api
+spec:
+  selector:
+    app: fast-food-rest-api
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: LoadBalancer

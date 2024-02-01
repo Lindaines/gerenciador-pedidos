@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/lanchonete?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+    url: jdbc:postgresql://${DATABASE_URL}:5432/lanchonete?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
 
     username: postgres
     password: postgres
