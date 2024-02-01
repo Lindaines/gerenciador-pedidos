@@ -6,12 +6,11 @@ import com.lachonete.gerenciadorpedidos.entities.OrderItem;
 import com.lachonete.gerenciadorpedidos.entities.Product;
 import com.lachonete.gerenciadorpedidos.entities.valueobject.*;
 import com.lachonete.gerenciadorpedidos.ports.database.OrderGateway;
-import com.lachonete.gerenciadorpedidos.ports.database.PaymentGateway;
 import com.lachonete.gerenciadorpedidos.ports.database.ProductGateway;
 import com.lachonete.gerenciadorpedidos.ports.presenters.order.OrderCreatedOutputBoundary;
-import com.lachonete.gerenciadorpedidos.ports.usescases.order.CheckoutOrderInputBoundary;
-import com.lachonete.gerenciadorpedidos.ports.usescases.order.CheckoutOrderRequest;
-import com.lachonete.gerenciadorpedidos.ports.usescases.order.CheckoutOrderResponse;
+import com.lachonete.gerenciadorpedidos.ports.usescases.order.add.CheckoutOrderInputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.usescases.order.add.CheckoutOrderRequest;
+import com.lachonete.gerenciadorpedidos.ports.usescases.order.add.CheckoutOrderResponse;
 import com.lachonete.gerenciadorpedidos.ports.usescases.payment.add.AddPaymentInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.payment.add.AddPaymentRequest;
 

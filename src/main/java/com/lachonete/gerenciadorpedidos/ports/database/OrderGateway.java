@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public interface OrderGateway {
     List<Order> getAll();
+    List<Order> getAllExceptFinished();
     Order add(Order order);
     Order getById(UUID id);
 

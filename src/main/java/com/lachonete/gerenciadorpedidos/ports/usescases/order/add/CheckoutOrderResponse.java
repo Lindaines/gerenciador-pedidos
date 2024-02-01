@@ -1,4 +1,4 @@
-package com.lachonete.gerenciadorpedidos.ports.usescases.order;
+package com.lachonete.gerenciadorpedidos.ports.usescases.order.add;
 
 import java.util.UUID;
 

@@ -3,9 +3,9 @@ package com.lachonete.gerenciadorpedidos.api.endpoints.order;
 
 import com.lachonete.gerenciadorpedidos.api.endpoints.BaseEndpoint;
 import com.lachonete.gerenciadorpedidos.ports.presenters.order.OrderCreatedOutputBoundary;
-import com.lachonete.gerenciadorpedidos.ports.usescases.order.CheckoutOrderInputBoundary;
-import com.lachonete.gerenciadorpedidos.ports.usescases.order.CheckoutOrderRequest;
-import com.lachonete.gerenciadorpedidos.ports.usescases.order.OrderItemRequest;
+import com.lachonete.gerenciadorpedidos.ports.usescases.order.add.CheckoutOrderInputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.usescases.order.add.CheckoutOrderRequest;
+import com.lachonete.gerenciadorpedidos.ports.usescases.order.add.OrderItemRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

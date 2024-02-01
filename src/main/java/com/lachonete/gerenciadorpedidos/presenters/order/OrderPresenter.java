@@ -1,19 +1,21 @@
 package com.lachonete.gerenciadorpedidos.presenters.order;
 
-import com.lachonete.gerenciadorpedidos.ports.presenters.customer.CustomerOutputBoundary;
-import com.lachonete.gerenciadorpedidos.ports.presenters.customer.CustomerViewModel;
-import com.lachonete.gerenciadorpedidos.ports.usescases.customer.get.CustomerResponse;
+import com.lachonete.gerenciadorpedidos.ports.presenters.order.OrderOutputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.presenters.order.OrderViewModel;
+import com.lachonete.gerenciadorpedidos.ports.usescases.order.get.OrderResponse;
 
-public class OrderPresenter extends BaseOrderPresenter implements CustomerOutputBoundary {
+public class OrderPresenter extends BaseOrderPresenter implements OrderOutputBoundary {
 
-    private CustomerViewModel viewModel;
+    private OrderViewModel viewModel;
+
+
     @Override
-    public CustomerViewModel getViewModel() {
+    public OrderViewModel getViewModel() {
         return viewModel;
     }
 
     @Override
-    public void present(CustomerResponse responseModel) {
-        viewModel = mapToCustomerViewModel(responseModel);
+    public void present(OrderResponse responseModel) {
+        viewModel = mapToOrderViewModel(responseModel);
     }
 }

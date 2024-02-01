@@ -35,6 +35,14 @@ public class JpaOrderGateway implements OrderGateway {
         return orderRepository.findAll().stream().map(this::mapToOrder).toList();
     }
 
+    @Override
+    public List<Order> getAllExceptFinished() {
+        return orderRepository.findAll().stream()
+                .map(this::mapToOrder)
+                .filter(order -> order.getOrderStatus() != OrderStatus.FINALIZADO )
+                .toList();
+    }
+
     private Order mapToOrder(OrderData orderData) {
 
         var orderItems = orderData.getItems().stream().map(orderItemRequest -> {
@@ -46,6 +54,7 @@ public class JpaOrderGateway implements OrderGateway {
                     .withQuantity(orderItemRequest.getQuantity())
                     .withSubTotal(subTotal)
                     .withPrice(price)
+                    .withId(new OrderItemId(orderItemRequest.getId()))
                     .build();
         }).toList();
         return Order.OrderBuilder.anOrder().withItems(orderItems)
