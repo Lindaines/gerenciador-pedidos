@@ -121,7 +121,7 @@ HTTP Status 204 No Content
 - Listar pedidos (segundo ordem do requisito do projeto e ignorando Finalizados)
 
 ```
-GET  /offer-service/api/v1/offers`
+GET  localhost:8080/api/v1/orders
 
 Response
 HTTP Status 200
