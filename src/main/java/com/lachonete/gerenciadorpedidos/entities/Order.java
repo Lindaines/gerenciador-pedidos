@@ -48,6 +48,9 @@ public class Order extends AggregateRoot<OrderId> {
         order.setPrice(new Money(total));
     }
 
+    public void updateStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 
 
     public static final class OrderBuilder {

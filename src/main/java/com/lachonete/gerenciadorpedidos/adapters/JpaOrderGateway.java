@@ -5,10 +5,7 @@ import com.lachonete.gerenciadorpedidos.adapters.data.OrderData;
 import com.lachonete.gerenciadorpedidos.adapters.data.OrderItemData;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.CustomerRepository;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.OrderRepository;
-import com.lachonete.gerenciadorpedidos.entities.Customer;
-import com.lachonete.gerenciadorpedidos.entities.Order;
-import com.lachonete.gerenciadorpedidos.entities.OrderItem;
-import com.lachonete.gerenciadorpedidos.entities.Product;
+import com.lachonete.gerenciadorpedidos.entities.*;
 import com.lachonete.gerenciadorpedidos.entities.valueobject.*;
 import com.lachonete.gerenciadorpedidos.ports.database.CustomerGateway;
 import com.lachonete.gerenciadorpedidos.ports.database.OrderGateway;
@@ -104,7 +101,16 @@ public class JpaOrderGateway implements OrderGateway {
 
     @Override
     public Order getById(UUID id) {
-        return null;
+        return orderRepository.findById(id)
+                .map(this::mapToOrder)
+                .orElse(null);
     }
-
+    @Override
+    public void updateStatus(UUID id, OrderStatus orderStatus) {
+        Order order = getById(id);
+        order.updateStatus(orderStatus);
+        var orderData = this.mapToOrderData(order);
+        orderData.setId(order.getId().getValue());
+        orderRepository.save(orderData);
+    }
 }

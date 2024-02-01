@@ -18,6 +18,7 @@ import com.lachonete.gerenciadorpedidos.ports.usescases.customer.add.AddCustomer
 import com.lachonete.gerenciadorpedidos.ports.usescases.customer.get.GetCustomerInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.order.add.CheckoutOrderInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.order.get.GetOrdersInputBoundary;
+import com.lachonete.gerenciadorpedidos.ports.usescases.order.update.UpdateOrderInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.payment.add.AddPaymentInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.payment.get.GetPaymentInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.payment.update.UpdatePaymentInputBoundary;
@@ -38,6 +39,7 @@ import com.lachonete.gerenciadorpedidos.usecases.customer.add.AddCustomer;
 import com.lachonete.gerenciadorpedidos.usecases.customer.get.GetCustomerById;
 import com.lachonete.gerenciadorpedidos.usecases.order.CheckoutOrder;
 import com.lachonete.gerenciadorpedidos.usecases.order.GetOrders;
+import com.lachonete.gerenciadorpedidos.usecases.order.update.UpdateOrder;
 import com.lachonete.gerenciadorpedidos.usecases.payment.get.GetPaymentById;
 import com.lachonete.gerenciadorpedidos.usecases.payment.add.AddPayment;
 import com.lachonete.gerenciadorpedidos.usecases.payment.update.UpdatePayment;
@@ -98,6 +100,11 @@ public class ApplicationConfiguration {
     @Bean
     public CheckoutOrderInputBoundary addOrderInputBoundary(OrderCreatedOutputBoundary orderCreatedOutputBoundary, Database database, AddPaymentInputBoundary addPaymentInputBoundary) {
         return new CheckoutOrder(orderCreatedOutputBoundary, database.orderGateway(), database.productGateway(), addPaymentInputBoundary);
+    }
+
+    @Bean
+    public UpdateOrderInputBoundary updateOrderInputBoundary(Database database) {
+        return new UpdateOrder(database.orderGateway());
     }
 
     @Bean
