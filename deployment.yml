@@ -16,7 +16,7 @@ spec:
           image: lindainesv49/sistema-fast-food-pos:latest
           resources:
             limits:
-              memory: "256Mi"
+              memory: "512Mi"
               cpu: "500m"
           ports:
             - name: tcp
