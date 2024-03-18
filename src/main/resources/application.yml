@@ -20,4 +20,12 @@ spring:
       open-in-view: false
       generate-ddl: true
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${JWT_ISSUER_URI}
+
+
+
 
