@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: fast-food-rest-api
-          image: lindainesv49/sistema-fast-food-pos:latest
+          image: 975049969291.dkr.ecr.us-east-1.amazonaws.com/gerenciador-pedidos:latest
           resources:
             limits:
               memory: "512Mi"
