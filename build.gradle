@@ -7,9 +7,6 @@ plugins {
 group = 'com.lachonete'
 version = '0.0.1-SNAPSHOT'
 
-java {
-	sourceCompatibility = "16"
-}
 
 configurations {
 	compileOnly {
