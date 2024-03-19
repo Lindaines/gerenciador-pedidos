@@ -29,10 +29,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_IMAGE }} .
-
-#      - name: Tag Docker image for ECR
-#        run: docker tag g${{ secrets.DOCKER_IMAGE }}:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/my-docker-image:latest
+        run: docker build -t ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.DOCKER_IMAGE }}.:latest .
 
       - name: Login to Amazon ECR
         run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
