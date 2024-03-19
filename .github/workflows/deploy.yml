@@ -27,23 +27,35 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Build Docker image
+        run: docker build -t gerenciador-pedidos .
+
+      - name: Tag Docker image for ECR
+        run: docker tag gerenciador-pedidos:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/my-docker-image:latest
+
+      - name: Login to Amazon ECR
+        run: aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+
+      - name: Push Docker image to Amazon ECR
+        run: docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/my-docker-image:latest
 #
 #      - name: Login to Amazon ECR
 #        id: login-ecr
 #        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Set outputs
-        id: vars
-        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-
-      - name: Build and push
-        id: build-and-push
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:${{ steps.vars.outputs.sha_short }}
+#
+#      - name: Set outputs
+#        id: vars
+#        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+#
+#      - name: Build and push
+#        id: build-and-push
+#        uses: docker/build-push-action@v5
+#        with:
+#          context: .
+#          platforms: linux/amd64,linux/arm64
+#          push: true
+#          tags: ${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:${{ steps.vars.outputs.sha_short }}
 
   deploy:
     name: Deploy to Amazon EKS
