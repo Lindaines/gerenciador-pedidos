@@ -7,7 +7,7 @@ on:
       - feature/authorization
 
 jobs:
-  buid:
+  build:
     name: Build and test
     runs-on: ubuntu-latest
     steps:
