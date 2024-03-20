@@ -70,4 +70,4 @@ RUN ./gradlew --no-daemon wrapper --gradle-version 7.0
 RUN ./gradlew --no-daemon build
 
 # Set the entry point for the container
-ENTRYPOINT ["java", "-jar", "build/libs/gerenciador-pedidos.jar"]
+ENTRYPOINT ["java", "-jar", "app/build/libs/gerenciador-pedidos-0.0.1-SNAPSHOT.jar"]
