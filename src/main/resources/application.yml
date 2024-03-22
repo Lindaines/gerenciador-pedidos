@@ -6,8 +6,8 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://${DATABASE_URL}:5432/lanchonete?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
 
-    username: postgres
-    password: postgres
+    username: ${DB_USER}
+    password: ${DB_PASS}
     schema: classpath:init-schema.sql
     initialization-mode: always
   jpa:
@@ -19,5 +19,13 @@ spring:
       database-platform: org.hibernate.dialect.PostgreSQLDialect
       open-in-view: false
       generate-ddl: true
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${JWT_ISSUER_URI}
+
+
 
 
