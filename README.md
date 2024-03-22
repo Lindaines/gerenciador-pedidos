@@ -46,7 +46,14 @@ Clone o projeto e execute o comando
 ## Endpoints
 Existem 13 apis públicas, todas podem ser acessadas através do link do swagger: http://localhost:8080/swagger-ui/index.html#/
 
-Caso prefira, também pode importar a collection do postman, que se encontra na raiz desse projeto. 
+Caso prefira, também pode importar a collection do postman, que se encontra na raiz desse projeto.
+
+## Autenticação
+As rotas precisam de acesso autenticado, nesse projeto está sendo usado o Sprig Security. Para rodar localmente e desabilitar a autenticação, comentar a dependencia do Spring Security no Graddle. 
+Caso queira testar com Autenticação, mandar Bearer token no header.
+
+A variável de ambiente JWT_ISSUER_URI precisa ser preenchida nesse caso. Ele é o issuer do token, a autoridade que confima a origem do JWT  e autoriza. Aqui nesse projeto foi usado o Cognito, mas pode ser usado qualquer um que está em conformidade com o padrao Oauth2, Open ID Connect.
+
 ## Ordem sugerida de execução das chamadas na API
 
 - Criar produto
