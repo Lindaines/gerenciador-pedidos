@@ -1,7 +1,7 @@
 package com.lachonete.gerenciadorpedidos.usecases.payment.get;
 
 
-import com.lachonete.gerenciadorpedidos.entities.Payment;
+import com.lachonete.gerenciadorpedidos.entities.PaymentDeprecated;
 import com.lachonete.gerenciadorpedidos.ports.database.PaymentGateway;
 import com.lachonete.gerenciadorpedidos.ports.presenters.payment.PaymentStatusOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.payment.get.GetPaymentByIdRequest;
@@ -19,7 +19,7 @@ public class GetPaymentById extends GetPaymentBase implements GetPaymentInputBou
 
     @Override
     public void execute(GetPaymentByIdRequest request) {
-        Payment payment = paymentGateway.getById(request.getId());
+        PaymentDeprecated payment = paymentGateway.getById(request.getId());
         presenter.present(makePaymentStatusResponse(payment));
     }
 }

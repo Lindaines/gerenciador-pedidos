@@ -1,4 +1,5 @@
 package com.lachonete.gerenciadorpedidos.entities;
+
 import com.lachonete.gerenciadorpedidos.entities.valueobject.Money;
 import com.lachonete.gerenciadorpedidos.entities.valueobject.OrderId;
 import com.lachonete.gerenciadorpedidos.entities.valueobject.OrderStatus;
@@ -12,6 +13,7 @@ public class Order extends AggregateRoot<OrderId> {
     private List<OrderItem> items;
     private Integer pickupCode;
     private OrderStatus orderStatus;
+    private String paymentId;
 
     public Money getPrice() {
         return price;
@@ -29,14 +31,22 @@ public class Order extends AggregateRoot<OrderId> {
         return orderStatus;
     }
 
+    public String getPaymentId() {
+        return paymentId;
+    }
+
+
     public void setPrice(Money price) {
         this.price = price;
     }
+
     public void setPickUpCodeInfo(Order order, Integer pickUpCode) {
         order.pickupCode = pickUpCode;
     }
 
-
+    public void setPaymentId(String paymentId) {
+        paymentId = paymentId;
+    }
 
     public void initializeOrder() {
         this.orderStatus = OrderStatus.CRIADO;
@@ -55,6 +65,7 @@ public class Order extends AggregateRoot<OrderId> {
 
     public static final class OrderBuilder {
         private OrderId orderId;
+        private String paymentId;
 
         private Money price;
 
@@ -64,6 +75,10 @@ public class Order extends AggregateRoot<OrderId> {
 
         public Money getPrice() {
             return price;
+        }
+
+        public String getPaymentId() {
+            return paymentId;
         }
 
         public List<OrderItem> getItems() {
@@ -95,6 +110,11 @@ public class Order extends AggregateRoot<OrderId> {
             return this;
         }
 
+        public OrderBuilder withPaymentId(String paymentId) {
+            this.paymentId = paymentId;
+            return this;
+        }
+
         public OrderBuilder withPrice(Money price) {
             this.price = price;
             return this;
@@ -119,6 +139,7 @@ public class Order extends AggregateRoot<OrderId> {
             Order order = new Order();
             order.setId(this.orderId);
             order.price = this.price;
+            order.paymentId = this.paymentId;
             order.items = this.items;
             order.pickupCode = this.pickupCode;
             order.orderStatus = this.orderStatus;

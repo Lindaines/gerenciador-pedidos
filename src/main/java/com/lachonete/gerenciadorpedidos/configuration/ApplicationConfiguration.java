@@ -1,10 +1,12 @@
 package com.lachonete.gerenciadorpedidos.configuration;
 
 import com.lachonete.gerenciadorpedidos.adapters.JpaDatabase;
+import com.lachonete.gerenciadorpedidos.adapters.api.ApiPaymentGateway;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.CustomerRepository;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.OrderRepository;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.PaymentRepository;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.ProductRepository;
+import com.lachonete.gerenciadorpedidos.ports.api.PaymentGateway;
 import com.lachonete.gerenciadorpedidos.ports.database.Database;
 import com.lachonete.gerenciadorpedidos.ports.presenters.customer.CustomerCreatedOutputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.presenters.customer.CustomerOutputBoundary;
@@ -52,6 +54,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.client.RestTemplate;
 
 
 @Configuration
@@ -61,6 +64,11 @@ public class ApplicationConfiguration {
     @Bean
     public Database database(ProductRepository productRepository, CustomerRepository customerRepository, OrderRepository orderRepository, PaymentRepository paymentRepository) {
         return new JpaDatabase(productRepository, customerRepository, orderRepository, paymentRepository);
+    }
+
+    @Bean
+    public PaymentGateway apiPaymentGateway() {
+        return new ApiPaymentGateway(new RestTemplate());
     }
 
     @Bean
@@ -92,6 +100,7 @@ public class ApplicationConfiguration {
     public AddCustomerInputBoundary addCustomerInputBoundary(CustomerCreatedOutputBoundary customerCreatedOutputBoundary, Database database) {
         return new AddCustomer(customerCreatedOutputBoundary, database.customerGateway());
     }
+
     @Bean
     public GetCustomerInputBoundary getCustomerInputBoundary(CustomerOutputBoundary customerOutputBoundary, Database database) {
         return new GetCustomerById(customerOutputBoundary, database.customerGateway());
@@ -111,19 +120,22 @@ public class ApplicationConfiguration {
     public GetOrdersInputBoundary getOrdersInputBoundary(OrdersOutputBoundary ordersOutputBoundary, Database database) {
         return new GetOrders(ordersOutputBoundary, database.orderGateway());
     }
+
     @Bean
     public UpdatePaymentInputBoundary updatePaymentInputBoundary(Database database) {
         return new UpdatePayment(database.paymentGateway());
     }
+
     @Bean
-    public AddPaymentInputBoundary addPaymentInputBoundary(Database database) {
-        return new AddPayment(database.paymentGateway());
+    public AddPaymentInputBoundary addPaymentInputBoundary(PaymentGateway paymentGateway) {
+        return new AddPayment(paymentGateway);
     }
 
     @Bean
     public GetPaymentInputBoundary getPaymentInputBoundary(PaymentStatusOutputBoundary paymentStatusOutputBoundary, Database database) {
         return new GetPaymentById(paymentStatusOutputBoundary, database.paymentGateway());
     }
+
     @Bean
     public ProductCreatedOutputBoundary productCreatedOutputBoundary() {
         return new ProductCreatedPresenter();

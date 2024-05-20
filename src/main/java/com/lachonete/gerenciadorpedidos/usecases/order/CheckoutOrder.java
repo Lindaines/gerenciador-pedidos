@@ -5,6 +5,7 @@ import com.lachonete.gerenciadorpedidos.entities.Order;
 import com.lachonete.gerenciadorpedidos.entities.OrderItem;
 import com.lachonete.gerenciadorpedidos.entities.Product;
 import com.lachonete.gerenciadorpedidos.entities.valueobject.*;
+import com.lachonete.gerenciadorpedidos.infra.PaymentRequest;
 import com.lachonete.gerenciadorpedidos.ports.database.OrderGateway;
 import com.lachonete.gerenciadorpedidos.ports.database.ProductGateway;
 import com.lachonete.gerenciadorpedidos.ports.presenters.order.OrderCreatedOutputBoundary;
@@ -35,12 +36,14 @@ public class CheckoutOrder implements CheckoutOrderInputBoundary {
         validateOrderItemInfo(order);
         order.initializeOrder();
         var orderSaved = addOrder(order);
-        var paymentId = addPaymentUseCase.execute(AddPaymentRequest.builder().orderId(orderSaved.getId().getValue()).price(orderSaved.getPrice().getAmount()).build());
+        var paymentId = addPaymentUseCase.execute(new AddPaymentRequest(orderSaved));
+        order.setPaymentId(paymentId);
+        addOrder(order);
         CheckoutOrderResponse responseModel = new CheckoutOrderResponse(orderSaved.getId().getValue(), orderSaved.getPickupCode(), paymentId);
         presenter.present(responseModel);
     }
 
-    private Order mapToOrder (CheckoutOrderRequest request){
+    private Order mapToOrder(CheckoutOrderRequest request) {
         var orderItems = request.getItems().stream().map(orderItemRequest -> {
             var product = new Product(new ProductId(orderItemRequest.getProductId()));
             var price = new Money(orderItemRequest.getPrice());
@@ -52,11 +55,13 @@ public class CheckoutOrder implements CheckoutOrderInputBoundary {
                     .withPrice(price)
                     .build();
         }).toList();
-       return Order.OrderBuilder.anOrder().withItems(orderItems).build();
+        return Order.OrderBuilder.anOrder().withItems(orderItems).build();
     }
+
     private Order addOrder(Order order) {
         return orderGateway.add(order);
     }
+
     public void validateOrderItemInfo(Order order) {
         order.getItems().forEach(orderItem -> {
             var product = productGateway.getById(orderItem.getProduct().getId().getValue());

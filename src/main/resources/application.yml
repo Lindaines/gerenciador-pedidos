@@ -1,13 +1,24 @@
 server:
   port: 8080
 
+
 spring:
+  external:
+    apis:
+      payment:
+        endpoint:
+          url: ${PAYMENT_API_ENDPOINT_URL:http://localhost:5000/payment}
+          timeout: 5000
+      s3:
+        endpoint:
+          url: ${S3_BUCKET_PREFIX:https://payments-lanchonete.s3.amazonaws.com/}
+          timeout: 5000
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://${DATABASE_URL}:5432/lanchonete?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
 
-    username: ${DB_USER}
-    password: ${DB_PASS}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASS:postgres}
     schema: classpath:init-schema.sql
     initialization-mode: always
   jpa:
@@ -20,11 +31,11 @@ spring:
       open-in-view: false
       generate-ddl: true
 
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: ${JWT_ISSUER_URI}
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: ${JWT_ISSUER_URI}
 
 
 

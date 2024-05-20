@@ -3,7 +3,7 @@ package com.lachonete.gerenciadorpedidos.adapters;
 
 import com.lachonete.gerenciadorpedidos.adapters.data.PaymentData;
 import com.lachonete.gerenciadorpedidos.adapters.repositories.PaymentRepository;
-import com.lachonete.gerenciadorpedidos.entities.Payment;
+import com.lachonete.gerenciadorpedidos.entities.PaymentDeprecated;
 import com.lachonete.gerenciadorpedidos.entities.valueobject.*;
 import com.lachonete.gerenciadorpedidos.ports.database.PaymentGateway;
 import org.springframework.stereotype.Component;
@@ -20,12 +20,12 @@ public class JpaPaymentGateway implements PaymentGateway {
 
 
     @Override
-    public List<Payment> getAll() {
+    public List<PaymentDeprecated> getAll() {
         return paymentRepository.findAll().stream().map(this::mapToPayment).toList();
     }
 
-    private Payment mapToPayment(PaymentData paymentData) {
-       return Payment.builder()
+    private PaymentDeprecated mapToPayment(PaymentData paymentData) {
+       return PaymentDeprecated.builder()
                .paymentId(new PaymentId(paymentData.getId()))
                .orderId(new OrderId(paymentData.getOrderId()))
                .price(new Money(paymentData.getPrice()))
@@ -34,7 +34,7 @@ public class JpaPaymentGateway implements PaymentGateway {
                .build();
     }
 
-    private PaymentData mapToPaymentData(Payment payment) {
+    private PaymentData mapToPaymentData(PaymentDeprecated payment) {
         return PaymentData.builder()
                 .orderId(payment.getOrderId().getValue())
                 .customerId(payment.getCustomerId().getValue())
@@ -43,14 +43,14 @@ public class JpaPaymentGateway implements PaymentGateway {
                 .build();
     }
 
-    public UUID add(Payment payment) {
+    public UUID add(PaymentDeprecated payment) {
         var paymentData = this.mapToPaymentData(payment);
         PaymentData paymentSaved = paymentRepository.save(paymentData);
         return paymentSaved.getId();
     }
 
     @Override
-    public Payment getById(UUID id) {
+    public PaymentDeprecated getById(UUID id) {
         return paymentRepository.findById(id)
                 .map(this::mapToPayment)
                 .orElse(null);
@@ -58,7 +58,7 @@ public class JpaPaymentGateway implements PaymentGateway {
 
     @Override
     public void updateStatus(UUID id, PaymentStatus paymentStatus) {
-        Payment payment = getById(id);
+        PaymentDeprecated payment = getById(id);
         payment.updateStatus(paymentStatus);
         var paymentData = this.mapToPaymentData(payment);
         paymentData.setId(payment.getId().getValue());

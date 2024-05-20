@@ -5,9 +5,9 @@ import java.util.UUID;
 public class CheckoutOrderResponse {
     private UUID id;
     private Integer pickupCode;
-    private UUID paymentId;
+    private String paymentId;
 
-    public CheckoutOrderResponse(UUID id, Integer pickupCode, UUID paymentId) {
+    public CheckoutOrderResponse(UUID id, Integer pickupCode, String paymentId) {
         this.id = id;
         this.pickupCode = pickupCode;
         this.paymentId = paymentId;
@@ -19,7 +19,7 @@ public class CheckoutOrderResponse {
     public Integer getPickupCode() {
         return pickupCode;
     }
-    public UUID getPaymentId() {
+    public String getPaymentId() {
         return paymentId;
     }
 }

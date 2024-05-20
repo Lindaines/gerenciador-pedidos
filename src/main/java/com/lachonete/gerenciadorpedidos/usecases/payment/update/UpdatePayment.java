@@ -1,7 +1,7 @@
 package com.lachonete.gerenciadorpedidos.usecases.payment.update;
 
 
-import com.lachonete.gerenciadorpedidos.entities.Payment;
+import com.lachonete.gerenciadorpedidos.entities.PaymentDeprecated;
 import com.lachonete.gerenciadorpedidos.ports.database.PaymentGateway;
 import com.lachonete.gerenciadorpedidos.ports.usescases.payment.update.UpdatePaymentInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.payment.update.UpdatePaymentRequest;
@@ -22,7 +22,7 @@ public class UpdatePayment implements UpdatePaymentInputBoundary {
         partialUpdate(request);
     }
     public void validatePayment(UUID id){
-        Payment payment = paymentGateway.getById(id);
+        PaymentDeprecated payment = paymentGateway.getById(id);
         if (payment==null){
             throw new PaymentGateway.PaymentNotFoundException();
         }
