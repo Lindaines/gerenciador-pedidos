@@ -22,8 +22,11 @@ public class ApiPaymentGateway implements PaymentGateway {
     @Override
     public Payment createPayment(Order order) {
         PaymentRequest request = new PaymentRequest(order);
-        PaymentResponse response = restTemplate.postForObject(this.paymentServiceURL, request, PaymentResponse.class);
-        assert response != null;
-        return new Payment(response.getId());
+        try {
+            PaymentResponse response = restTemplate.postForObject(this.paymentServiceURL, request, PaymentResponse.class);
+            return response.toPayment(response);
+        } catch (Exception exception) {
+            throw new RuntimeException();
+        }
     }
 }
