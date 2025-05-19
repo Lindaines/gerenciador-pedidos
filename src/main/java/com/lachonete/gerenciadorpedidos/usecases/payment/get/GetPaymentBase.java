@@ -19,7 +19,7 @@ public abstract class GetPaymentBase {
 
     public static PaymentResponse makePaymentStatusResponse(PaymentDeprecated payment) {
         return PaymentResponse.builder()
-                .id(payment.getId().getValue())
+                .id(payment.getId().toString())
                 .paymentStatus(payment.getPaymentStatus())
                 .build();
     }

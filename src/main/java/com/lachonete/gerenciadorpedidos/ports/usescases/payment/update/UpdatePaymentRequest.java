@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdatePaymentRequest {
-    private UUID id;
+    private String id;
     private PaymentStatus status;
     }
 

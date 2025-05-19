@@ -28,7 +28,7 @@ public class GetPaymentStatusByIdEndpoint implements BaseEndpoint {
     }
 
     @GetMapping("/{paymentId}")
-    public ResponseEntity execute(@PathVariable final UUID paymentId) {
+    public ResponseEntity execute(@PathVariable final String paymentId) {
         useCase.execute(GetPaymentByIdRequest.builder().id(paymentId).build());
         return ResponseEntity.ok(presenter.getViewModel());
     }

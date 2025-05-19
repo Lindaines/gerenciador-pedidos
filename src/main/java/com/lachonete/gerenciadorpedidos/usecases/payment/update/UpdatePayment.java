@@ -18,10 +18,10 @@ public class UpdatePayment implements UpdatePaymentInputBoundary {
 
     @Override
     public void execute(UpdatePaymentRequest request) {
-        validatePayment(request.getId());
+        //validatePayment(request.getId());
         partialUpdate(request);
     }
-    public void validatePayment(UUID id){
+    public void validatePayment(String id){
         PaymentDeprecated payment = paymentGateway.getById(id);
         if (payment==null){
             throw new PaymentGateway.PaymentNotFoundException();

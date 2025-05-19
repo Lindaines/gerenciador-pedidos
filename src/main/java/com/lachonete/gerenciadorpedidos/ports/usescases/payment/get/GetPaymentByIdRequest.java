@@ -11,6 +11,6 @@ import java.util.UUID;
 @Builder
 @Getter
 public class GetPaymentByIdRequest {
-    private UUID id;
+    private String id;
 
 }

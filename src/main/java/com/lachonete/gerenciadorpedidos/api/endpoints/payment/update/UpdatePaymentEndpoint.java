@@ -20,7 +20,7 @@ public class UpdatePaymentEndpoint implements BaseEndpoint {
     }
 
     @PatchMapping("/{paymentId}")
-    public ResponseEntity execute(@PathVariable final UUID paymentId, @Valid @RequestBody UpdatePaymentStatusRequest request){
+    public ResponseEntity execute(@PathVariable final String paymentId, @Valid @RequestBody UpdatePaymentStatusRequest request){
         UpdatePaymentRequest updateRequest = UpdatePaymentRequest.builder().id(paymentId).status(request.getPaymentStatus()).build();
         useCase.execute(updateRequest);
         return ResponseEntity.ok().build();

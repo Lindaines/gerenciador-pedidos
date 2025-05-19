@@ -16,10 +16,10 @@ public class PaymentDeprecated extends AggregateRoot<PaymentId> {
     private PaymentStatus paymentStatus;
     private ZonedDateTime createdAt;
 
-    public void initializePayment() {
-        setId(new PaymentId(UUID.randomUUID()));
-        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
-    }
+//    public void initializePayment() {
+//        setId(new PaymentId(String));
+//        createdAt = ZonedDateTime.now(ZoneId.of("UTC"));
+//    }
 
     public void validatePayment(List<String> failureMessages) {
         if (price == null || !price.isGreaterThanZero()) {

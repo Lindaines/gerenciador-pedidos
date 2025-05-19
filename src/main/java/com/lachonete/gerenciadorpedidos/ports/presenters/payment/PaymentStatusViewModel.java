@@ -10,6 +10,6 @@ import java.util.UUID;
 @Builder
 @Getter
 public class PaymentStatusViewModel {
-    private UUID id;
+    private String id;
     private PaymentStatus status;
 }

@@ -9,9 +9,9 @@ import java.util.UUID;
 
 public interface PaymentGateway {
     List<PaymentDeprecated> getAll();
-    UUID add(PaymentDeprecated payment);
-    PaymentDeprecated getById(UUID id);
-    void updateStatus(UUID id, PaymentStatus paymentStatus);
+    String add(PaymentDeprecated payment);
+    PaymentDeprecated getById(String id);
+    void updateStatus(String id, PaymentStatus paymentStatus);
 
     public interface BadRequest {}
     public interface NotFound {}
