@@ -14,6 +14,9 @@ import com.lachonete.gerenciadorpedidos.ports.usescases.order.add.CheckoutOrderR
 import com.lachonete.gerenciadorpedidos.ports.usescases.order.add.CheckoutOrderResponse;
 import com.lachonete.gerenciadorpedidos.ports.usescases.payment.add.AddPaymentInputBoundary;
 import com.lachonete.gerenciadorpedidos.ports.usescases.payment.add.AddPaymentRequest;
+import com.lachonete.gerenciadorpedidos.usecases.exception.PaymentServiceException;
+
+import java.text.MessageFormat;
 
 
 public class CheckoutOrder implements CheckoutOrderInputBoundary {
@@ -38,6 +41,7 @@ public class CheckoutOrder implements CheckoutOrderInputBoundary {
         var orderSaved = addOrder(order);
         var paymentId = addPaymentUseCase.execute(new AddPaymentRequest(orderSaved));
         order.setPaymentId(paymentId);
+        order.updateStatus(OrderStatus.AGUARDANDO_PAGAMENTO);
         addOrder(order);
         CheckoutOrderResponse responseModel = new CheckoutOrderResponse(orderSaved.getId().getValue(), orderSaved.getPickupCode(), paymentId);
         presenter.present(responseModel);
