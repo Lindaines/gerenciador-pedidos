@@ -42,9 +42,7 @@ import com.lachonete.gerenciadorpedidos.usecases.customer.get.GetCustomerById;
 import com.lachonete.gerenciadorpedidos.usecases.order.CheckoutOrder;
 import com.lachonete.gerenciadorpedidos.usecases.order.GetOrders;
 import com.lachonete.gerenciadorpedidos.usecases.order.update.UpdateOrder;
-import com.lachonete.gerenciadorpedidos.usecases.payment.get.GetPaymentById;
 import com.lachonete.gerenciadorpedidos.usecases.payment.add.AddPayment;
-import com.lachonete.gerenciadorpedidos.usecases.payment.update.UpdatePayment;
 import com.lachonete.gerenciadorpedidos.usecases.product.add.AddProduct;
 import com.lachonete.gerenciadorpedidos.usecases.product.get.GetProductById;
 import com.lachonete.gerenciadorpedidos.usecases.product.get.GetProducts;
@@ -120,21 +118,12 @@ public class ApplicationConfiguration {
     public GetOrdersInputBoundary getOrdersInputBoundary(OrdersOutputBoundary ordersOutputBoundary, Database database) {
         return new GetOrders(ordersOutputBoundary, database.orderGateway());
     }
-
-    @Bean
-    public UpdatePaymentInputBoundary updatePaymentInputBoundary(Database database) {
-        return new UpdatePayment(database.paymentGateway());
-    }
-
+    
     @Bean
     public AddPaymentInputBoundary addPaymentInputBoundary(PaymentGateway paymentGateway) {
         return new AddPayment(paymentGateway);
     }
 
-    @Bean
-    public GetPaymentInputBoundary getPaymentInputBoundary(PaymentStatusOutputBoundary paymentStatusOutputBoundary, Database database) {
-        return new GetPaymentById(paymentStatusOutputBoundary, database.paymentGateway());
-    }
 
     @Bean
     public ProductCreatedOutputBoundary productCreatedOutputBoundary() {
