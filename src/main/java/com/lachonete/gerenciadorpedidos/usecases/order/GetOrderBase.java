@@ -13,7 +13,7 @@ import com.lachonete.gerenciadorpedidos.ports.usescases.product.get.ProductRespo
 public abstract class GetOrderBase {
     protected GetOrderBase() { }
 
-    private static OrderItemResponse makeOrderItemResponse (OrderItem orderItem){
+    public static OrderItemResponse makeOrderItemResponse (OrderItem orderItem){
         return OrderItemResponse.builder()
                 .subTotal(orderItem.getSubTotal().getAmount())
                 .quantity(orderItem.getQuantity())

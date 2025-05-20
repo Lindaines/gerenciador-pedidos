@@ -47,7 +47,7 @@ public class CheckoutOrder implements CheckoutOrderInputBoundary {
         presenter.present(responseModel);
     }
 
-    private Order mapToOrder(CheckoutOrderRequest request) {
+    public Order mapToOrder(CheckoutOrderRequest request) {
         var orderItems = request.getItems().stream().map(orderItemRequest -> {
             var product = new Product(new ProductId(orderItemRequest.getProductId()));
             var price = new Money(orderItemRequest.getPrice());
@@ -62,7 +62,7 @@ public class CheckoutOrder implements CheckoutOrderInputBoundary {
         return Order.OrderBuilder.anOrder().withItems(orderItems).build();
     }
 
-    private Order addOrder(Order order) {
+    public Order addOrder(Order order) {
         return orderGateway.add(order);
     }
 
