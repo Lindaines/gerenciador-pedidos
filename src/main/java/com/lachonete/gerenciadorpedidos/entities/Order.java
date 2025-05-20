@@ -45,7 +45,7 @@ public class Order extends AggregateRoot<OrderId> {
     }
 
     public void setPaymentId(String paymentId) {
-        paymentId = paymentId;
+        this.paymentId = paymentId;
     }
 
     public void initializeOrder() {

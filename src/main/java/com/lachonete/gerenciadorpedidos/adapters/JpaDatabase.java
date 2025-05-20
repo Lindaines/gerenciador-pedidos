@@ -10,13 +10,11 @@ public class JpaDatabase implements Database {
     private ProductGateway productGateway;
     private CustomerGateway customerGateway;
     private OrderGateway orderGateway;
-    private PaymentGateway paymentGateway;
 
     public JpaDatabase(ProductRepository productRepository, CustomerRepository customerRepository, OrderRepository orderRepository, PaymentRepository paymentRepository) {
         productGateway = new JpaProductGateway(productRepository);
         customerGateway = new JpaCustomerGateway(customerRepository);
         orderGateway = new JpaOrderGateway(orderRepository);
-        paymentGateway = new JpaPaymentGateway(paymentRepository);
     }
 
     @Override
@@ -32,8 +30,5 @@ public class JpaDatabase implements Database {
     @Override
     public OrderGateway orderGateway() {
         return orderGateway;
-    }
-    public PaymentGateway paymentGateway() {
-        return paymentGateway;
     }
 }
