@@ -34,7 +34,7 @@ jobs:
         run: |
           ./gradlew clean build jacocoTestReport sonarqube \
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \ 
-            -Dsonar.projectKey=gerenciador-pedidos 
+            -Dsonar.projectKey=gerenciador-pedidos
            
 
 #      - name: Set up QEMU
