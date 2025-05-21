@@ -40,7 +40,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         }
     }
 
-    private ResponseEntity<ErrorResponse> getErrorResponseForStatus(Throwable ex, HttpStatus httpStatus, String defaultMessage) {
+    public ResponseEntity<ErrorResponse> getErrorResponseForStatus(Throwable ex, HttpStatus httpStatus, String defaultMessage) {
         String message = ErrorMessageMap.errors.getOrDefault(ex.getClass(), defaultMessage);
         return new ResponseEntity<>(
                 ErrorResponse
@@ -51,7 +51,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         );
     }
 
-    private ResponseEntity<ErrorResponse> getDefaultErrorResponse(final Throwable throwable) {
+    public ResponseEntity<ErrorResponse> getDefaultErrorResponse(final Throwable throwable) {
         logger.fatal("Unhandled exception ", throwable);
         return new ResponseEntity<>(
                 ErrorResponse
@@ -81,13 +81,13 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         return ex.getCause() instanceof InvalidFormatException;
     }
 
-    private ResponseEntity<Object> parseInvalidFormatException(final InvalidFormatException ife) {
+    public ResponseEntity<Object> parseInvalidFormatException(final InvalidFormatException ife) {
         String errorMessage = getErrorMessageForInvalidFormatException(ife);
 
         return formatErrorResponseForHttpMessageNotReadable(errorMessage);
     }
 
-    private String getErrorMessageForInvalidFormatException(final InvalidFormatException ife) {
+    public String getErrorMessageForInvalidFormatException(final InvalidFormatException ife) {
         logger.warn("Handling exception due to bad data ", ife);
         String errorMessage = MESSAGE_NOT_READABLE_ERROR_MESSAGE_PATTERN;
         try {
@@ -103,17 +103,17 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         }
     }
 
-    private boolean isJsonParseException(final HttpMessageNotReadableException ex) {
+    public boolean isJsonParseException(final HttpMessageNotReadableException ex) {
         return ex.getCause() instanceof JsonParseException;
     }
 
-    private ResponseEntity<Object> parseJsonParseException(final JsonParseException jpe) {
+    public ResponseEntity<Object> parseJsonParseException(final JsonParseException jpe) {
         String errorMessage = getErrorMessageForJsonParseException(jpe);
 
         return formatErrorResponseForHttpMessageNotReadable(errorMessage);
     }
 
-    private String getErrorMessageForJsonParseException(final JsonParseException jpe) {
+    public String getErrorMessageForJsonParseException(final JsonParseException jpe) {
         logger.warn("Handling exception due to bad data ", jpe);
         String errorMessage = MESSAGE_NOT_READABLE_ERROR_MESSAGE_PATTERN;
 
@@ -127,7 +127,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         }
     }
 
-    private ResponseEntity<Object> formatErrorResponseForHttpMessageNotReadable(final String errorMessage) {
+    public ResponseEntity<Object> formatErrorResponseForHttpMessageNotReadable(final String errorMessage) {
         return new ResponseEntity<>(
                 ErrorResponse
                         .builder()

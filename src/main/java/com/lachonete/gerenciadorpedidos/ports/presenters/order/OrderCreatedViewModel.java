@@ -1,7 +1,7 @@
 package com.lachonete.gerenciadorpedidos.ports.presenters.order;
 
+import lombok.Builder;
 import org.springframework.beans.factory.annotation.Value;
-
 public class OrderCreatedViewModel {
 
     private String id;
