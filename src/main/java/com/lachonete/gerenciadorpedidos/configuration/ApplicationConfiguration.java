@@ -33,7 +33,6 @@ import com.lachonete.gerenciadorpedidos.presenters.customer.CustomerCreatedPrese
 import com.lachonete.gerenciadorpedidos.presenters.customer.CustomerPresenter;
 import com.lachonete.gerenciadorpedidos.presenters.order.OrderCreatedPresenter;
 import com.lachonete.gerenciadorpedidos.presenters.order.OrdersPresenter;
-import com.lachonete.gerenciadorpedidos.presenters.payment.PaymentStatusPresenter;
 import com.lachonete.gerenciadorpedidos.presenters.product.ProductCreatedPresenter;
 import com.lachonete.gerenciadorpedidos.presenters.product.ProductPresenter;
 import com.lachonete.gerenciadorpedidos.presenters.product.ProductsPresenter;
@@ -158,11 +157,6 @@ public class ApplicationConfiguration {
     @Bean
     public OrdersOutputBoundary ordersOutputBoundary() {
         return new OrdersPresenter();
-    }
-
-    @Bean
-    public PaymentStatusOutputBoundary paymentStatusOutputBoundary() {
-        return new PaymentStatusPresenter();
     }
 
 }
