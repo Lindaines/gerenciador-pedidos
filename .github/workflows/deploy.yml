@@ -32,7 +32,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          ./gradlew clean build jacocoTestReport sonar \ # Changed sonarqube to sonar
+          ./gradlew clean build jacocoTestReport sonar \
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
             -Dsonar.projectKey=gerenciador-pedidos
 
