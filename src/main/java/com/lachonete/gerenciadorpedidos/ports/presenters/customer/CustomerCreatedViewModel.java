@@ -1,5 +1,6 @@
 package com.lachonete.gerenciadorpedidos.ports.presenters.customer;
 
+
 public class CustomerCreatedViewModel {
 
     private String id;

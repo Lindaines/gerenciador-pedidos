@@ -1,11 +1,10 @@
 package com.lachonete.gerenciadorpedidos.ports.usescases.order.add;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
 import java.util.List;
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

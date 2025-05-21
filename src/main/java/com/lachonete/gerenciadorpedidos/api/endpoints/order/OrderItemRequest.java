@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data
+@Builder
 public class OrderItemRequest {
     private UUID productId;
     private  int quantity;

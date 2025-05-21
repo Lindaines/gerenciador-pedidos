@@ -1,10 +1,7 @@
 package com.lachonete.gerenciadorpedidos.adapters.data;
 
 import com.lachonete.gerenciadorpedidos.entities.valueobject.ProductCategory;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -15,6 +12,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
 @Entity(name = "customers")
 public class CustomerData {
     @Id

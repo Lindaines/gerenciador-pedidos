@@ -19,9 +19,9 @@ import java.util.UUID;
 @Entity
 public class PaymentData {
     @Id
-    @GenericGenerator(name = "UUIDGenerator", strategy = "uuid2")
-    @GeneratedValue(generator = "UUIDGenerator")
-    private UUID id;
+//    @GenericGenerator(name = "UUIDGenerator", strategy = "uuid2")
+//    @GeneratedValue(generator = "UUIDGenerator")
+    private String id;
     private UUID customerId;
     private UUID orderId;
     private BigDecimal price;

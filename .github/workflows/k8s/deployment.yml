@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: fast-food-rest-api
+  namespace: fast-food-ecosystem
 spec:
   selector:
     matchLabels:
@@ -27,29 +28,29 @@ spec:
               memory: "512Mi"
               cpu: "500m"
           ports:
-            - containerPort: 8080               
+            - containerPort: 8080
           env:
-          - name: DATABASE_URL
-            valueFrom:
-              secretKeyRef:
-                name: secret-gerenciador-pedidos
-                key: dburl
-          - name: DB_USER
-            valueFrom:
-              secretKeyRef:
-                name: secret-gerenciador-pedidos
-                key: dbuser     
-          - name: DB_PASS
-            valueFrom:
-              secretKeyRef:
-                name: secret-gerenciador-pedidos
-                key: dbpass
-          - name: JWT_ISSUER_URI
-            valueFrom:
-              secretKeyRef:
-                name: secret-gerenciador-pedidos
-                key: jwtissuer   
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: secret-gerenciador-pedidos
+                  key: dburl
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: secret-gerenciador-pedidos
+                  key: dbuser
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: secret-gerenciador-pedidos
+                  key: dbpass
+            - name: JWT_ISSUER_URI
+              valueFrom:
+                secretKeyRef:
+                  name: secret-gerenciador-pedidos
+                  key: jwtissuer
           volumeMounts:
-          - name: secret-volume
-            mountPath: /mnt/secrets
-            readOnly: true                          
+            - name: secret-volume
+              mountPath: /mnt/secrets
+              readOnly: true
