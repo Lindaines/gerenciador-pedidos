@@ -32,10 +32,9 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          ./gradlew clean build jacocoTestReport sonarqube \
-            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \ 
+          ./gradlew clean build jacocoTestReport sonarqube\
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}\ 
             -Dsonar.projectKey=gerenciador-pedidos
-           
 
 #      - name: Set up QEMU
 #        uses: docker/setup-qemu-action@v3
