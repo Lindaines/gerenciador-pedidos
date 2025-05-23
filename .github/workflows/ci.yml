@@ -58,21 +58,20 @@ jobs:
       - name: Push Docker image to Amazon ECR
         run: docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.DOCKER_IMAGE }}:latest
 
-#  deploy:
-#    name: Deploy to Amazon EKS
-#    needs: build
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#
-#      - name: Configure AWS Credentials
-#        uses: aws-actions/configure-aws-credentials@v2
-#        with:
-#          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#          aws-region: ${{ secrets.AWS_REGION }}
-#
-#      - name: Deploy to EKS
-#        run: |
-#          aws eks --region ${{ secrets.AWS_REGION }} update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }}
-#          kubectl apply -f https://raw.githubusercontent.com/Lindaines/gerenciador-pedidos/feature/authorization/.github/workflows/k8s/deployment.yml
+  deploy:
+    name: Deploy to Amazon EKS
+    needs: build-and-analyze
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy to EKS
+        run: |
+          aws eks --region ${{ secrets.AWS_REGION }} update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }}
+          kubectl apply -f https://raw.githubusercontent.com/Lindaines/gerenciador-pedidos/feature/authorization/.github/workflows/k8s/deployment.yml
